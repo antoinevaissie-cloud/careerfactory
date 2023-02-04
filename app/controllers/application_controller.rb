@@ -1,3 +1,3 @@
 class ApplicationController < ActionController::Base
-  #test
+  before_action :authenticate_user!
 end
