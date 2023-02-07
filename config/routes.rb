@@ -6,5 +6,9 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
 
-  
+  # config/routes.rb
+Rails.application.routes.draw do
+  resources :campaigns, only: [:new, :edit]
+
+end
 end
