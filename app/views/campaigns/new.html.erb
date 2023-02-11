@@ -1,1 +1,23 @@
-"hello world"
+<div class="main-container">
+  <div class="general-index-container">
+    <div class="general-index-title">
+      <h2>Your campaign</h2>
+      <p>Configure your campaign below</p>
+    </div>
+    <div class="general-index-card-container">
+      <% @recruiters.each do |recruiter| %>
+          <div class="general-index-card">
+            <div class="general-index-card-img-container">
+              <%= image_tag "https://source.unsplash.com/random/?person" %>
+            </div>
+              <div class="general-index-card-description-container">
+                <%= recruiter.first_name %>
+                <%= recruiter.last_name %>
+                <%= recruiter.company %>
+                <%= recruiter.email %>
+              </div>
+          </div>
+        <% end %>
+    </div>
+  </div>
+</div>

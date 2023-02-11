@@ -7,8 +7,6 @@ Rails.application.routes.draw do
   # root "articles#index"
 
   # config/routes.rb
-Rails.application.routes.draw do
   resources :campaigns, only: [:new, :edit]
 
-end
 end

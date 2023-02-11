@@ -1,6 +1,9 @@
 class CampaignsController < ApplicationController
+  def index
+  end
+
   def new
-    @cam
+    @recruiters = User.where(role: "Recruiter")
   end
 
   def create
