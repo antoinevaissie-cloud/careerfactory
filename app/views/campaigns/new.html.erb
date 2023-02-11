@@ -1,9 +1,17 @@
+
+
 <div class="main-container">
   <div class="general-index-container">
     <div class="general-index-title">
       <h2>Your campaign</h2>
       <p>Configure your campaign below</p>
     </div>
+<div>
+<%= simple_form_for @campaign do |f| %>
+  <%= f.input :batch_number, collection: [1003, 1004, 1005], label: "Pick a Batch", as: :select %>
+  <%= f.button :submit %>
+<% end %>
+</div>
     <div class="general-index-card-container">
       <% @recruiters.each do |recruiter| %>
           <div class="general-index-card">

@@ -4,6 +4,7 @@ class CampaignsController < ApplicationController
 
   def new
     @recruiters = User.where(role: "Recruiter")
+    @campaign = Campaign.new
   end
 
   def create
