@@ -7,5 +7,5 @@
   <%= f.input :start_date, collection: @start_dates, label: "Start Date", as: :select %>
   <%= f.input :end_date, collection: @end_dates, label: "End Date", as: :select %>
   <%= f.input :slot_size, collection: [15, 30], label: "Slot Size (minutes)", as: :select %>
-  <%= f.button :submit class: "btn btn-primary"%>
+  <%= f.button :submit, class: "btn btn-primary", button_html: { class: "btn btn-primary" } %>
 <% end %>
