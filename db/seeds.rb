@@ -9,11 +9,14 @@
 # Clear the existing data
 
 User.destroy_all
-
+student_email = ["lewagon"]
 companies = ["google", "amazon", "facebook", "microsoft"]
-first_names = ["clay", "burt", "kelly", "mike", "bruce"]
-last_names = ["power", "ducourty", "skelly", "everhard", "johnson"]
+first_names = ["clay", "burt", "kelly", "mike", "bruce", "leon"]
+last_names = ["power", "ducourty", "skelly", "everhard", "johnson", "durand"]
 
+batch_number = [1001,1002,1003]
+
+#Create recruiters
 5.times do |n|
   first_name = first_names.sample
   last_name = last_names.sample
@@ -27,5 +30,23 @@ last_names = ["power", "ducourty", "skelly", "everhard", "johnson"]
     last_name: last_name,
     role: "Recruiter",
     company: company
+  )
+
+
+end
+
+30.times do |n|
+  first_name = first_names.sample
+  last_name = last_names.sample
+  company = student_email.sample
+  email = "#{first_name}.#{last_name}@#{company}.com"
+
+  User.create(
+    email: email,
+    password: "password",
+    first_name: first_name,
+    last_name: last_name,
+    role: "Student",
+    batch_number: batch_number.sample
   )
 end
