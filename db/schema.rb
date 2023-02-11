@@ -70,4 +70,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_09_194536) do
   add_foreign_key "bookings", "users", column: "recruiter_id"
   add_foreign_key "campaign_users", "campaigns"
   add_foreign_key "campaign_users", "users"
+
 end
