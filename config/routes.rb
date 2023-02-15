@@ -10,14 +10,17 @@ Rails.application.routes.draw do
   resources :campaigns, only: [:create, :new, :edit]
 
   #As a candidate I can see all recruiters of the campaign
-  resources :campaigns do
-      resources :users, as: :recruiters, only: [:index]
+  get "campaigns/:campaign_id/recruiters", to: "recruiters#index", as: "recruiters"
+=begin
+resources :campaigns do
+      resources :users, only: [:index], as: :recruiters
   end
+=end
 
   #As a batch student I can book a slot with a recruiter through Calendly API
-  resources :campaigns do
-    resources :recruiters, as: :recruiters do
-        resources :bookings, only: [:create, :new]
-    end
-  end
+  get "campaigns/:campaign_id/recruiters/:recruiter_id/new", to: "bookings#new", as: "bookings_new"
+  post "campaigns/:campaign_id/recruiters/:recruiter_id/create", to: "recruiters#create", as: "bookings_create"
+
+
+
 end

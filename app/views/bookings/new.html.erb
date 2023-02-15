@@ -1,1 +1,9 @@
-<h1>You are booking with <%= @recruiter.full_name_company %></h1>
+<h1>You are booking with <%= @recruiter.full_name_and_company.capitalize %> for a duration of <%= @campaign.slot_size %> minutes</h1>
+
+
+<!-- Calendly inline widget begin -->
+<div class="calendly-inline-widget" data-url="https://calendly.com/francoisdel?hide_landing_page_details=1&hide_gdpr_banner=1" style="min-width:320px;height:630px;"></div>
+<script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+<!-- Calendly inline widget end -->
+
+<%= link_to "Book with another recruiter", recruiters_path %>
