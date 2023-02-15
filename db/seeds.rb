@@ -8,16 +8,40 @@
 
 # Clear the existing data
 
+CampaignUser.destroy_all
+Campaign.destroy_all
 User.destroy_all
+
 student_email = ["lewagon"]
 companies = ["google", "amazon", "facebook", "microsoft"]
 first_names = ["clay", "burt", "kelly", "mike", "bruce", "leon"]
 last_names = ["power", "ducourty", "skelly", "everhard", "johnson", "durand"]
 
 batch_number = [1001,1002,1003]
+#create batch managers
+
+3.times do |n|
+  first_name = first_names.sample
+  last_name = last_names.sample
+  company = "Le Wagon"
+  email = "#{first_name}.#{last_name}@lewagon.com"
+
+  User.create(
+    email: email,
+    password: "password",
+    first_name: first_name,
+    last_name: last_name,
+    role: "Manager",
+    company: company
+  )
+
+
+end
+
+batch_manager = User.where(role: "Manager").last
 
 #Create recruiters
-5.times do |n|
+10.times do |n|
   first_name = first_names.sample
   last_name = last_names.sample
   company = companies.sample
@@ -35,11 +59,12 @@ batch_number = [1001,1002,1003]
 
 end
 
+#create students
 30.times do |n|
   first_name = first_names.sample
   last_name = last_names.sample
   company = student_email.sample
-  email = "#{first_name}.#{last_name}@#{company}.com"
+  email = "#{first_name}.#{last_name}@#{student_email}.com"
 
   User.create(
     email: email,
@@ -51,8 +76,21 @@ end
   )
 end
 
-
+#create campaigns
 5.times do |n|
 
+  current_campaign = Campaign.create(
+    batch_number: batch_number.sample,
+    start_date: "2023-01-01",
+    end_date: "20223-01-02",
+    slot_size: 15,
+    user_id: batch_manager.id
+  )
 
+  3.times do |n|
+    CampaignUser.create(
+      campaign_id: current_campaign.id,
+      user_id: User.where(role: "Recruiter").sample.id
+    )
+  end
 end

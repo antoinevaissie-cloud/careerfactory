@@ -30,22 +30,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_11_143007) do
     t.index ["recruiter_id"], name: "index_bookings_on_recruiter_id"
   end
 
-  create_table "campaign_candidates", force: :cascade do |t|
+  create_table "campaign_users", force: :cascade do |t|
     t.bigint "campaign_id", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["campaign_id"], name: "index_campaign_candidates_on_campaign_id"
-    t.index ["user_id"], name: "index_campaign_candidates_on_user_id"
-  end
-
-  create_table "campaign_recruiters", force: :cascade do |t|
-    t.bigint "campaign_id", null: false
-    t.bigint "user_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["campaign_id"], name: "index_campaign_recruiters_on_campaign_id"
-    t.index ["user_id"], name: "index_campaign_recruiters_on_user_id"
+    t.index ["campaign_id"], name: "index_campaign_users_on_campaign_id"
+    t.index ["user_id"], name: "index_campaign_users_on_user_id"
   end
 
   create_table "campaigns", force: :cascade do |t|
@@ -53,8 +44,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_11_143007) do
     t.datetime "start_date"
     t.datetime "end_date"
     t.integer "slot_size"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_campaigns_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -77,8 +70,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_11_143007) do
   add_foreign_key "bookings", "campaigns"
   add_foreign_key "bookings", "users", column: "candidate_id"
   add_foreign_key "bookings", "users", column: "recruiter_id"
-  add_foreign_key "campaign_candidates", "campaigns"
-  add_foreign_key "campaign_candidates", "users"
-  add_foreign_key "campaign_recruiters", "campaigns"
-  add_foreign_key "campaign_recruiters", "users"
+  add_foreign_key "campaign_users", "campaigns"
+  add_foreign_key "campaign_users", "users"
 end
