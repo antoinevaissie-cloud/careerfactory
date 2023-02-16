@@ -1,5 +1,6 @@
 class CampaignsController < ApplicationController
   def index
+    @campaigns = Campaign.all
   end
 
   def new
@@ -19,17 +20,37 @@ class CampaignsController < ApplicationController
     end
   end
 
+  def show
+    @campaign = Campaign.find(params[:id])
+
+    # Get the list of candidate and recruiter users
+    @candidates = @campaign.user.where(role: 'candidate')
+    @recruiters = @campaign.user.where(role: 'recruiter')
+
+  end
+
 
   def edit
   end
 
   def create
     @campaign = Campaign.new(campaign_params)
-    @campaign.users_id = current_user
+    @user = current_user
+    @campaign.user_id = @user.id
+    campaigns_params[:user_ids].each do |t|
+      @campaign_users = CampaignUser.
+    raise
+    # @campaign_users = CampaignUsers.new
+    #   CampaignUser.create(
+    #     campaign_id: @campaign.id,
+    #     user_id: CampaignUser.where(role: "recruiter")
+    #   )
+  # end
+
 
     if @campaign.save
       # redirect to a success page or display a success message
-      redirect_to @campaign, notice: 'Campaign was successfully created.'
+      redirect_to campaigns_path, notice: 'Campaign was successfully created.'
     else
       # render the form again with error messages
       render :new
@@ -39,8 +60,9 @@ class CampaignsController < ApplicationController
   private
 
   def campaign_params
-    params.require(:campaign).permit(:batch_number, :start_date, :end_date, :slot_size, :users_id)
+    params.require(:campaign).permit(:batch_number, :start_date, :end_date, :slot_size, :user_ids)
   end
+
 
 
 end

@@ -1,0 +1,24 @@
+<div class="main-container">
+  <div class="general-index-container">
+    <div class="general-index-title">
+      <h2>Your campaign</h2>
+      <p>See your campaigns below</p>
+    </div>
+    <div class="general-index-card-container">
+      <% @campaigns.each do |campaign| %>
+        <div class="general-index-card">
+          <div class="general-index-card-img-container">
+            <%= image_tag "https://source.unsplash.com/random/?nature" %>
+          </div>
+          <div class="general-index-card-description-container">
+            <%= campaign.batch_number %>
+            <%= campaign.start_date %>
+            <%= campaign.end_date %>
+            <%= campaign.slot_size %>
+            <%= link_to "More details", campaign_path(campaign), class: "btn btn-primary" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

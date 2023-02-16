@@ -1,9 +1,9 @@
-
 <h2>Your campaign</h2>
 <p>Configure your campaign below</p>
+
 <%= simple_form_for @campaign do |f| %>
-  <%= f.input :batch_number, collection: [1003, 1004, 1005, 1006], label: "Pick a Batch", as: :select %>
-  <%= f.input :users_id, collection: User.where(role: "Recruiter"), label: "Recruiters" , input_html: { class: 'multiselectuser', multiple: true }, label_method: :full_name_and_company, include_hidden: false %>
+  <%= f.input :batch_number, collection: User.select(:batch_number).distinct.order(:batch_number).pluck(:batch_number), label: "Pick a Batch", as: :select %>
+  <%= f.input :user_ids, collection: User.where(role: "recruiter"), label: "Recruiters", input_html: { class: 'multiselectuser', multiple: true }, label_method: :full_name_and_company, include_hidden: false %>
   <%= f.input :start_date, collection: @start_dates, label: "Start Date", as: :select %>
   <%= f.input :end_date, collection: @end_dates, label: "End Date", as: :select %>
   <%= f.input :slot_size, collection: [15, 30], label: "Slot Size (minutes)", as: :select %>
