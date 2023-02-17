@@ -1,16 +1,31 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
-#   Character.create(name: "Luke", movie: movies.first)
-
-# Clear the existing data
-
 CampaignUser.destroy_all
 Campaign.destroy_all
 User.destroy_all
+
+require 'csv'
+=begin
+CSV.foreach(Rails.root.join('db', 'users.csv'), headers: true) do |row|
+  next if row['email'].blank?
+  puts "Processing row: #{row.inspect}"
+
+  user = User.new(
+    email: row['email'],
+    password: row['password'],
+    reset_password_token: row['reset_password_token'],
+    reset_password_sent_at: row['reset_password_sent_at'],
+    remember_created_at: row['remember_created_at'],
+    created_at: row['created_at'],
+    updated_at: row['updated_at'],
+    first_name: row['first_name'],
+    last_name: row['last_name'],
+    role: row['role'],
+    batch_number: row['batch_number'],
+    company: row['company']
+  )
+  user.save!
+end
+=end
+
 
 student_email = ["lewagon"]
 companies = ["google", "amazon", "facebook", "microsoft"]
@@ -28,7 +43,7 @@ batch_number = [1001,1002,1003]
 
   User.create(
     email: email,
-    password: "password",
+    password: "123456",
     first_name: first_name,
     last_name: last_name,
     role: "Manager",
@@ -37,6 +52,15 @@ batch_number = [1001,1002,1003]
 
 
 end
+
+User.create(
+  email: "user1@gmail.com",
+  password: "123456",
+  first_name: "super",
+  last_name: "batch_manager",
+  role: "Manager",
+  company: "leWagon"
+)
 
 batch_manager = User.where(role: "Manager").last
 
@@ -49,7 +73,7 @@ batch_manager = User.where(role: "Manager").last
 
   User.create(
     email: email,
-    password: "password",
+    password: "123456",
     first_name: first_name,
     last_name: last_name,
     role: "Recruiter",
@@ -68,7 +92,7 @@ end
 
   User.create(
     email: email,
-    password: "password",
+    password: "123456",
     first_name: first_name,
     last_name: last_name,
     role: "Student",

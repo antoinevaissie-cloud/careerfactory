@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   # root "articles#index"
 
   # config/routes.rb
-  resources :campaigns, only: [:create, :new, :edit]
+  resources :campaigns, only: [:create, :new, :edit, :index, :show]
 
   #As a candidate I can see all recruiters of the campaign
   get "campaigns/:campaign_id/recruiters", to: "recruiters#index", as: "recruiters"
