@@ -2,6 +2,12 @@
 <li><strong>Recruiters:</strong> <%= @recruiters.length %></li>
 
 
+<li><strong>Batch Number:</strong>
+
+    <%= @campaign.batch_number %>
+
+</li>
+
 <li><strong>Candidates:</strong>
   <ul>
     <% @candidates.each do |candidate| %>

@@ -5,6 +5,7 @@ class CampaignsController < ApplicationController
 
   def new
     @recruiters = User.where(role: "Recruiter")
+
     @campaign = Campaign.new
     @start_dates = []
     @end_dates = []
@@ -24,8 +25,8 @@ class CampaignsController < ApplicationController
     @campaign = Campaign.find(params[:id])
 
     # Get the list of candidate and recruiter users
-    @candidates = @campaign.user.where(role: 'candidate')
-    @recruiters = @campaign.user.where(role: 'recruiter')
+    @candidates = User.where(role: 'Student', batch_number: @campaign.batch_number)
+    @recruiters = @campaign.users.where(role: 'Recruiter')
 
   end
 
@@ -37,28 +38,35 @@ class CampaignsController < ApplicationController
     @campaign = Campaign.new(campaign_params)
     @user = current_user
     @campaign.user_id = @user.id
-    campaigns_params[:user_ids].each do |t|
-      @campaign_users = CampaignUser.
-    raise
-    # @campaign_users = CampaignUsers.new
-    #   CampaignUser.create(
-    #     campaign_id: @campaign.id,
-    #     user_id: CampaignUser.where(role: "recruiter")
-    #   )
-  # end
-
+    puts "User IDs: #{params[:campaign][:user_ids]}"
 
     if @campaign.save
-      # redirect to a success page or display a success message
-      redirect_to campaigns_path, notice: 'Campaign was successfully created.'
+
     else
       # render the form again with error messages
       render :new
     end
+
+    params[:campaign][:user_ids].each do |t|
+       @campaign_user = CampaignUser.new(
+         campaign_id: @campaign.id,
+         user_id: (t.to_i)
+       )
+       if @campaign_user.valid?
+         @campaign_user.save
+        else
+          puts @campaign_user.errors.full_messages
+        end
+
+
+    end
+    redirect_to campaigns_path, notice: 'Campaign was successfully created.'
+
+
   end
 
-  private
 
+  private
   def campaign_params
     params.require(:campaign).permit(:batch_number, :start_date, :end_date, :slot_size, :user_ids)
   end
