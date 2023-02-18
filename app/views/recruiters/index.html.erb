@@ -1,7 +1,25 @@
-<li><strong>Recruiters:</strong>
-  <ul>
-    <% @recruiters.each do |recruiter| %>
-      <li><%= recruiter.full_name_and_company %></li>
-    <% end %>
-  </ul>
-</li>
+
+<div class="main-container">
+  <div class="general-index-container" data-controller="cards" data-action="click->cards#selectCard">
+    <div class="general-index-title">
+      <h2>These are the recruiters participating in the speed-dating</h2>
+      <p>Click in for more detail</p>
+    </div>
+    <div class="general-index-card-container">
+<% @recruiters.each do |recruiter| %>
+        <div class="general-index-card">
+          <div class="general-index-card-img-container">
+          <% if recruiter.company.photo.attached? %>
+            <%= cl_image_tag recruiter.company.photo.key %>
+          <% else %>
+            <%= image_tag "no_photo.png" %>
+          <% end %>
+          </div>
+            <div class="general-index-card-description-container">
+              <%= recruiter.full_name_and_company %>
+            </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

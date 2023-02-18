@@ -5,9 +5,14 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :campaigns, through: :campaign_users
+  belongs_to :company, optional: true
 
   def full_name_and_company
-    "#{first_name} #{last_name} : #{company}"
+    if company.present?
+      "#{first_name} #{last_name} : #{company.name}"
+    else
+      "#{first_name} #{last_name}"
+    end
   end
 
 end
