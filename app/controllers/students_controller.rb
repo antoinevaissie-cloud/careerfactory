@@ -1,7 +1,9 @@
 class StudentsController < ApplicationController
   def index
     if params[:campaign_id]
-      @students = Campaign.find(params[:campaign_id]).users.where(role: "Student")
+      @campaign = Campaign.find(params[:campaign_id])
+
+      @students = User.where(role: 'Student', batch_number: @campaign.batch_number)
     else
       @students = User.where(role: "Student")
     end
