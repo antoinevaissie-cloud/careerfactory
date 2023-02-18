@@ -12,3 +12,4 @@ export default class extends Controller {
     var typed = new Typed('.typing-element', options);
   }
 }
+

@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
   <head>
-
     <title>Careerfactory</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <%= csrf_meta_tags %>
@@ -11,9 +10,10 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload" , defer: true %>
   </head>
 
-  <body><%= render "shared/navbar" %>
-<%= render "shared/flashes" %>
+  <body>
 
+    <%= render 'shared/navbar' %>
+    <%= render "shared/flashes" %>
     <%= yield %>
   </body>
 </html>

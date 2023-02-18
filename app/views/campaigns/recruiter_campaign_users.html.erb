@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="row">
+    <% campaign_users.where(role: 'Recruiter').each do |campaign_user| %>
+      <div class="col-md-4">
+        <div class="card mb-4 box-shadow">
+          <div class="card-body">
+            <h5 class="card-title"><%= campaign_user.campaign.batch_number %></h5>
+            <p class="card-text">
+              <%= campaign_user.campaign.start_date %>
+              <%= campaign_user.campaign.end_date %>
+              <%= campaign_user.campaign.slot_size %>
+            </p>
+            <%= link_to "More details", campaign_path(campaign_user.campaign), class: "btn btn-primary" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

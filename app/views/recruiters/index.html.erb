@@ -1,0 +1,7 @@
+<li><strong>Recruiters:</strong>
+  <ul>
+    <% @recruiters.each do |recruiter| %>
+      <li><%= recruiter.full_name_and_company %></li>
+    <% end %>
+  </ul>
+</li>

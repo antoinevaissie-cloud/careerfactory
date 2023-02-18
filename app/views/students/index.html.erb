@@ -1,0 +1,7 @@
+<li><strong>Students:</strong>
+  <ul>
+    <% @students.each do |student| %>
+      <li><%= student.full_name_and_company %></li>
+    <% end %>
+  </ul>
+</li>
