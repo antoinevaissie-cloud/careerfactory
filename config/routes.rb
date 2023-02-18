@@ -11,6 +11,9 @@ Rails.application.routes.draw do
 
   #As a candidate I can see all recruiters of the campaign
   get "campaigns/:campaign_id/recruiters", to: "recruiters#index", as: "recruiters"
+
+  #As a recruiter I can see all students of the campaign
+  get "campaigns/:campaign_id/students", to: "students#index", as: "students"
 =begin
 resources :campaigns do
       resources :users, only: [:index], as: :recruiters

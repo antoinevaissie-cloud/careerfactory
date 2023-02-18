@@ -1,25 +1,57 @@
-<h2>Sign up</h2>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <!-- Need to read device screen width (Bootstrap) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), data: { turbo: :false }) do |f| %>
-  <%= f.error_notification %>
+    <!-- Bootstrap & Fontawesome CSS only! -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css">
+  </head>
+  <body>
 
-  <div class="form-inputs">
-    <%= f.input :email,
-                required: true,
-                autofocus: true,
-                input_html: { autocomplete: "email" }%>
-    <%= f.input :password,
-                required: true,
-                hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
-                input_html: { autocomplete: "new-password" } %>
-    <%= f.input :password_confirmation,
-                required: true,
-                input_html: { autocomplete: "new-password" } %>
-  </div>
+    <!-- Code here -->
+    <div class="container bg-light">
+      <div class="row">
+        <div class="col-6 d-flex align-items-center bg-light">
+          <h1>
+            <span data-controller="typed" class="typing-element"></span>
+          </h2>
+        </div>
+        <div class="col-6">
+          <h3>
+            Login or Sign-Up
+          </h3>
+            <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), data: { turbo: :false }) do |f| %>
+              <%= f.error_notification %>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Sign up" %>
-  </div>
-<% end %>
+              <div class="form-inputs">
+                <%= f.input :email,
+                            required: true,
+                            autofocus: true,
+                            input_html: { autocomplete: "email" }%>
+                <%= f.input :password,
+                            required: true,
+                            hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+                            input_html: { autocomplete: "new-password" } %>
+                  <%= f.input :role, collection: %w[recruiter candidate manager], prompt: "Select Role" %>
 
-<%= render "devise/shared/links" %>
+                <%= f.input :password_confirmation,
+                            required: true,
+                            input_html: { autocomplete: "new-password" } %>
+              </div>
+
+              <div class="form-actions btn btn-primary">
+                <%= f.button :submit, "Sign up" %>
+              </div>
+            <% end %>
+
+            <%= render "devise/shared/links" %>
+
+        </div>
+      </div>
+    </div>
+    <!-- Bootstrap JavaScript library -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+  </body>
+</html>

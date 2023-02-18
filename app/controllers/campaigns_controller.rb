@@ -25,7 +25,7 @@ class CampaignsController < ApplicationController
     @campaign = Campaign.find(params[:id])
 
     # Get the list of candidate and recruiter users
-    @candidates = User.where(role: 'Student', batch_number: @campaign.batch_number)
+    @students = User.where(role: 'Student', batch_number: @campaign.batch_number)
     @recruiters = @campaign.users.where(role: 'Recruiter')
 
   end
