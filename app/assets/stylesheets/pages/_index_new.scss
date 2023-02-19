@@ -4,11 +4,16 @@
     margin-right: 20px;
     background-color: aliceblue;
   }
+
   &-title{}
   &-card{
     border: 1px solid black;
     border-radius: 12px;
     transition: transform .4s;
+
+    &-hidden-checkbox{
+        display: none;
+    }
 
     &:hover{
       transform: scale(1.05);
