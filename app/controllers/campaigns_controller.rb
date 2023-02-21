@@ -42,7 +42,6 @@ class CampaignsController < ApplicationController
 
 
 
-
   def show
     @campaign = Campaign.find(params[:id])
     @students = User.where(role: 'Student', batch_number: @campaign.batch_number)
