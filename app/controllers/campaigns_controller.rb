@@ -21,18 +21,45 @@ class CampaignsController < ApplicationController
     end
   end
 
-  def show
-    @campaign = Campaign.find(params[:id])
+
+
+ # def show
+   # @campaign = Campaign.find(params[:id])
 
     # Get the list of candidate and recruiter users
+  #  @students = User.where(role: 'Student', batch_number: @campaign.batch_number)
+ #   @recruiters = @campaign.users.where(role: 'Recruiter')
+#
+#  end
+
+ # def current_campaign_recruiters
+   # current_campaign = Campaign.find(params[:id])
+   # @recruiters = current_campaign.users.where(role: "recruiter")
+   # @recruiters.each do |recruiter|
+  #    puts recruiter.full_name_and_company
+ #   end
+#  end
+
+
+
+  def show
+    @campaign = Campaign.find(params[:id])
     @students = User.where(role: 'Student', batch_number: @campaign.batch_number)
     @recruiters = @campaign.users.where(role: 'Recruiter')
+    @current_campaign_recruiters = current_campaign_recruiters
+  end
 
+
+  def current_campaign_recruiters
+    current_campaign = Campaign.find(params[:id])
+    current_campaign.users.where(role: 'Recruiter')
   end
 
 
   def edit
   end
+
+
 
   def create
     @campaign = Campaign.new(campaign_params)
