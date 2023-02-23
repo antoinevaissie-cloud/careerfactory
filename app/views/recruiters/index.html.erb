@@ -17,9 +17,8 @@
             <div class="general-index-card-description-container">
               <%= recruiter.full_name_and_company %>
               <div class="mx-auto">
-              <div class="btn btn-primary" data-cal-link="<%= current_user.campaign_users.find_by(campaign_id: @campaign.id).user.cal_link %>">Schedule a meeting</div>
-              </div>
-
+              <div class="btn btn-primary" data-cal-link="<%=recruiter.cal_link%>">Schedule a meeting</div>
+            </div>
 <script type="text/javascript">
 (function (C, A, L) {
   let p = function (a, ar) { a.q.push(ar); };

@@ -21,8 +21,43 @@
   </li>
 </ul>
 <div class="tab-content" id="pills-tabContent">
-  <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">Recruiters</div>
-  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">Students</div>
+  <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">            <div class="main-container">
+              <div class="general-index-container">
+                <div class="general-index-card-container">
+                  <% @current_campaign_recruiters.each do |recruiter| %>
+                    <div class="general-index-card">
+                      <div class="general-index-card-img-container">
+                      <% if recruiter.company.photo.attached? %>
+                        <%= cl_image_tag recruiter.company.photo.key %>
+                      <% else %>
+                        <%= image_tag "no_photo.png" %>
+                      <% end %>
+                      </div>
+                        <div class="general-index-card-description-container">
+                          <%= recruiter.full_name_and_company %>
+                        </div>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+</div>
+  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab"><div class="general-index-card-container">
+      <% @students.each do |student| %>
+        <div class="general-index-card">
+          <div class="general-index-card-img-container">
+          <% if student.company.photo.attached? %>
+            <%= cl_image_tag student.company.photo.key %>
+          <% else %>
+            <%= image_tag "no_photo.png" %>
+          <% end %>
+          </div>
+            <div class="general-index-card-description-container">
+              <%= student.full_name_and_company %>
+            </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
   <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">3</div>
 </div>
 
@@ -39,11 +74,7 @@
     <div class="tab-content">
         <div class="tab-pane fade show active" id="home">
             <div class="main-container">
-              <div class="general-index-container" data-controller="cards" data-action="click->cards#selectCard">
-                <div class="general-index-title">
-                  <h4>These are the recruiters participating in the speed-dating</h4>
-                  <p>Click in for more detail</p>
-                </div>
+              <div class="general-index-container">
                 <div class="general-index-card-container">
                   <% @current_campaign_recruiters.each do |recruiter| %>
                     <div class="general-index-card">
