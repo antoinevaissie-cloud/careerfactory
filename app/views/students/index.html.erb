@@ -1,7 +1,16 @@
-<li><strong>Students:</strong>
-  <ul>
-    <% @students.each do |student| %>
-      <li><%= student.full_name_and_company %></li>
-    <% end %>
-  </ul>
-</li>
+<div class="general-index-card-container">
+      <% @students.each do |student| %>
+        <div class="general-index-card">
+          <div class="general-index-card-img-container">
+          <% if student.company.photo.attached? %>
+            <%= cl_image_tag student.company.photo.key %>
+          <% else %>
+            <%= image_tag "no_photo.png" %>
+          <% end %>
+          </div>
+            <div class="general-index-card-description-container">
+              <%= student.full_name_and_company %>
+            </div>
+        </div>
+      <% end %>
+    </div>

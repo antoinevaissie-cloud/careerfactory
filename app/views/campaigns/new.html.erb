@@ -1,20 +1,3 @@
-<!--
-
-
-<h2>Your campaign</h2>
-<p>Configure your campaign below</p>
-
-<%= simple_form_for @campaign do |f| %>
-  <%= f.input :batch_number, collection: User.select(:batch_number).distinct.order(:batch_number).pluck(:batch_number), label: "Pick a Batch", as: :select %>
-  <%= f.input :user_ids, collection: @recruiters, label: "Recruiters", input_html: { class: 'multiselectuser', multiple: true }, label_method: :full_name_and_company, include_hidden: false %>
-  <%= f.input :start_date, collection: @start_dates, label: "Start Date", as: :select %>
-  <%= f.input :end_date, collection: @end_dates, label: "End Date", as: :select %>
-  <%= f.input :slot_size, collection: [15, 30], label: "Slot Size (minutes)", as: :select %>
-  <%= f.button :submit, class: "btn btn-primary", button_html: { class: "btn btn-primary" } %>
-<% end %>
-
--->
-
 <html>
   <head>
     <meta charset="utf-8">
@@ -28,7 +11,8 @@
   <body>
 
     <!-- Code here -->
-    <div class="container bg-light">
+    <div class="container">
+      <h1 class="text-center m-4">Configure your campaign below.</h1>
       <div class="row">
         <div class="col-6 d-flex align-items-center bg-light">
           <h1>
@@ -36,20 +20,35 @@
           </h2>
         </div>
         <div class="col-6">
-          <h3>
-            Configure your campaign
-          </h3>
-<%= simple_form_for @campaign do |f| %>
-  <%= f.input :batch_number, collection: User.select(:batch_number).distinct.order(:batch_number).pluck(:batch_number), label: "Pick a Batch", as: :select %>
-  <%# <%= f.input :user_ids, collection: @recruiters, label: "Recruiters", input_html: { class: 'multiselectuser', multiple: true }, label_method: :full_name_and_company, include_hidden: false %> %>
-  <%= f.input :user_ids, collection: @recruiters, as: :check_boxes, label: "Recruiters",  label_method: :full_name_and_company, include_hidden: false %>
-  <%= f.input :start_date, collection: @start_dates, label: "Start Date", as: :select %>
-  <%= f.input :end_date, collection: @end_dates, label: "End Date", as: :select %>
-  <%= f.input :slot_size, collection: [15, 30], label: "Slot Size (minutes)", as: :select %>
-  <%= f.button :submit, class: "btn btn-primary", button_html: { class: "btn btn-primary" } %>
-<% end %>
-
-
+          <%= simple_form_for @campaign do |f| %>
+            <div class="steps">
+              <h3>Choose the student batch</h3>
+            </div>
+            <%= f.input :batch_number,
+            as: :radio_buttons,
+            collection_wrapper_tag: 'div',
+            collection_wrapper_class: 'category-wrapper',
+            item_wrapper_class: 'category-item',
+            input_html: {class: 'category-selector'},
+            collection: User.select(:batch_number).distinct.order(:batch_number).pluck(:batch_number), label:"Pick a batch number"%>
+            <div class="steps">
+              <h3>Choose the recruiters who should participate</h3>
+            </div>
+              <%= f.collection_check_boxes :user_ids, @recruiters, :id, :full_name_and_company, {}, { class: 'tag-selector' }%>
+            <div class="steps">
+              <h3>Pick a start date and a start time</h3>
+            </div>
+            <%= f.input :start_date, collection: @start_dates, label: "Start Date", as: :select %>
+            <div class="steps">
+              <h3>Pick an end date and an end time</h3>
+            </div>
+            <%= f.input :end_date, collection: @end_dates, label: "End Date", as: :select %>
+            <div class="steps">
+              <h3>Choose the slot size</h3>
+            </div>
+            <%= f.input :slot_size, collection: [15, 30], label: "Slot Size (minutes)", as: :select %>
+            <%= f.button :submit, class: "btn btn-primary", button_html: { class: "btn btn-primary" } %>
+          <% end %>
         </div>
       </div>
     </div>
