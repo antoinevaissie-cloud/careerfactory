@@ -10,6 +10,8 @@ application.register("cards", CardsController)
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 
+import ShowBookingsController from "./show_bookings_controller"
+application.register("show-bookings", ShowBookingsController)
+
 import TypedController from "./typed_controller"
 application.register("typed", TypedController)
-

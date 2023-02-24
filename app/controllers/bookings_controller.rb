@@ -12,5 +12,11 @@ class BookingsController < ApplicationController
 
   end
 
+  def list_bookings
+    user = User.find(current_user.id)
+
+    @api_key = user.role == 'Student' ? ENV['STUDENT_API_KEY'] : ENV['RECRUITER_API_KEY']
+  end
+
 
 end
