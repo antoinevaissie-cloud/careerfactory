@@ -2,14 +2,22 @@
 // Run that command whenever you add a new controller or create them with
 // ./bin/rails generate stimulus controllerName
 
+window.Stimulus = Application.start()
+const context = require.context("./controllers", true, /\.js$/)
+Stimulus.load(definitionsFromContext(context))
 import { application } from "./application"
+
+import ByebyeController from "./byebye_controller"
+application.register("byebye", ByebyeController)
 
 import CardsController from "./cards_controller"
 application.register("cards", CardsController)
 
+import GoodbyeController from "./goodbye_controller"
+application.register("goodbye", GoodbyeController)
+
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 
-import TypedController from "./typed_controller"
-application.register("typed", TypedController)
-
+import ~typedController from "./~typed_controller"
+application.register("~typed", ~typedController)
