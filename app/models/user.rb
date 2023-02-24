@@ -15,5 +15,9 @@ class User < ApplicationRecord
     end
   end
 
+  def calendar_username
+    company&.name&.downcase
+  end
+
 
 end

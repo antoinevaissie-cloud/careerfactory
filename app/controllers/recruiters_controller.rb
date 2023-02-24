@@ -4,7 +4,7 @@ class RecruitersController < ApplicationController
     if params[:campaign_id]
       @recruiters = Campaign.find(params[:campaign_id]).users
 
-      #pluck(:user_id)
+      @slot_size_in_min = "#{Campaign.find(params[:campaign_id]).slot_size}min"
 
     else
       @recruiters = User.where(role: "Recruiter")

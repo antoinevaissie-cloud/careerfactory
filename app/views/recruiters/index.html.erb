@@ -17,8 +17,9 @@
             <div class="general-index-card-description-container">
               <%= recruiter.full_name_and_company %>
               <div class="mx-auto">
-              <div class="btn btn-primary" data-cal-link="<%=recruiter.cal_link%>">Schedule a meeting</div>
+              <div class="btn btn-primary" data-cal-link="<%=recruiter.calendar_username%>/<%= @slot_size_in_min%>">Schedule a meeting</div>
             </div>
+
 <script type="text/javascript">
 (function (C, A, L) {
   let p = function (a, ar) { a.q.push(ar); };
@@ -55,3 +56,4 @@ Cal("ui", {"styles":{"branding":{"brandColor":"#000000"}},"hideEventTypeDetails"
     </div>
   </div>
 </div>
+

@@ -1,5 +1,6 @@
 class StudentsController < ApplicationController
   def index
+
     if params[:campaign_id]
       @campaign = Campaign.find(params[:campaign_id])
 
@@ -8,4 +9,5 @@ class StudentsController < ApplicationController
       @students = User.where(role: "Student")
     end
   end
+
 end
