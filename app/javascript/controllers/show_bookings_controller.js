@@ -4,20 +4,23 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static targets = ["results"]
 
+  static values = {
+    apiKey: String,
+  }
+
   connect() {
 
-    console.log('hello')
-
-    fetch(`https://api.cal.com/v1/bookings?apiKey=cal_live_4afa37f5e71a4c0012cadf97b34414a7`)
+    fetch(`https://api.cal.com/v1/bookings?apiKey=${this.apiKeyValue}`)
       .then(response => response.json())
-
 
       .then((data) => {
         results.innerHTML = "";
         data.bookings.forEach((booking) => {
           console.log('booking', booking)
+
           const bookingTitle = `<li>Booking status: ${booking.title}</li>`;
           const bookingStatus = `<li>Booking status: ${booking.status}</li>`;
+
           results.insertAdjacentHTML("afterbegin", bookingTitle, bookingStatus);
         });
       });
