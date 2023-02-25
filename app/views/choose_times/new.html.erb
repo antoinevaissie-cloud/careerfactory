@@ -1,0 +1,35 @@
+<div>
+  <%= simple_form_for @time,
+                    html: {
+                      data: {
+                        controller: 'flatpickr'
+                      }
+                    } do |f| %>
+    <div class="steps">
+      <h3>Pick a start date and a start time</h3>
+    </div>
+    <%= f.input :start_date,  as: :string,
+              input_html: {
+                data: {
+                  flatpickr_target: 'startDateInput',
+                }
+              }
+               %>
+    <div class="steps">
+      <h3>Pick an end date and an end time</h3>
+    </div>
+    <%= f.input :end_date, as: :string,
+              input_html: {
+                data: {
+                  flatpickr_target: 'endDateInput'
+                }
+              } %>
+    <div class="steps">
+      <h3>Choose the slot size</h3>
+    </div>
+    <%= f.input :slot_size, collection: [15, 30], label: "Slot Size (minutes)", as: :select %>
+
+    <%= f.button :submit, class: "btn btn-primary", button_html: { class: "btn btn-primary" } %>
+
+  <% end %>
+</div>

@@ -1,0 +1,10 @@
+<div>
+  <%= simple_form_for @recruiter do |f| %>
+    <div class="steps">
+      <h3>Choose the recruiters who should participate</h3>
+    </div>
+    <%= f.collection_check_boxes :user_ids, @recruiters, :id, :full_name_and_company, {}, { class: 'tag-selector' }%>
+    <%= f.button :submit, class: "btn btn-primary", button_html: { class: "btn btn-primary" } %>
+
+  <% end %>
+</div>

@@ -5,13 +5,9 @@ Company.destroy_all
 
 require 'csv'
 
-student_email = "lewagon"
 companies = ["Wiz","Teradata","Salesforce","Palo Alto Networks","Netapp","Mongodb","Linkedin","Instagram","Gitlab","Elastic","Datadog","Databricks","Collibra","Apple","Aiven","Optimizely","Zoominfo","Quantum Metric","Exabeam","Broadcom","Climate Engine","Trax","Carto","Liveramp","Crux","Zebra","Vimeo","Planet","Sensormatic", "Le Wagon"]
 photos = ["wiz.png","teradata.png","salesforce.png","paloaltonetworks.png","netapp.png","mongodb.png","linkedin.png","instagram.png","gitlab.png","elastic.png","datadog.png","databricks.png","collibra.png","apple.png","aiven.png","optimizely.png","zoominfo.png","quantummetric.png","exabeam.png","broadcom.png","climateengine.png","trax.png","carto.png","liveramp.png","crux.png","zebra.png","vimeo.png","planet.png","sensormatic.png","lewagon.png"]
-first_names = ["clay", "burt", "kelly", "mike", "bruce", "leon"]
-last_names = ["power", "ducourty", "skelly", "everhard", "johnson", "durand"]
 
-batch_number = [1001, 1002, 1003]
 #create companies
 
 companies.each_with_index do |name, index|
