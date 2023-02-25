@@ -24,4 +24,6 @@ resources :campaigns do
   end
 =end
 
+  
+
 end
