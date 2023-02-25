@@ -4,11 +4,17 @@
 
 import { application } from "./application"
 
+import AllCheckboxesController from "./all_checkboxes_controller"
+application.register("all-checkboxes", AllCheckboxesController)
+
 import ByebyeController from "./byebye_controller"
 application.register("byebye", ByebyeController)
 
 import CardsController from "./cards_controller"
 application.register("cards", CardsController)
+
+import FlatpickrController from "./flatpickr_controller"
+application.register("flatpickr", FlatpickrController)
 
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
@@ -18,6 +24,3 @@ application.register("show-bookings", ShowBookingsController)
 
 import TypedController from "./typed_controller"
 application.register("typed", TypedController)
-
-import AllCheckboxesController from "./all_checkboxes_controller"
-application.register("all-checkboxes", AllCheckboxesController)

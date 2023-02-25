@@ -7,18 +7,36 @@ class CampaignsController < ApplicationController
   end
 
   def new
-    @recruiters = User.where(role: "Recruiter")
-    @campaign = Campaign.new
-    @start_dates = []
-    @end_dates = []
-    start_time = Time.new(2023, 3, 20, 9, 0, 0)
-    end_time = Time.new(2023, 3, 24, 18, 0, 0)
-    while start_time <= end_time
-      @start_dates << start_time
-      @end_dates << start_time + 1.hour
-      start_time += 1.hour
-    end
+    redirect_to new_choose_batch_path
   end
+
+  def choose_batch
+
+  end
+
+  def choose_recruiters
+    @recruiters = User.where(role: "Recruiter")
+  end
+
+  def choose_times
+    @start_times = (Time.new(2023, 3, 20, 9, 0, 0)..Time.new(2023, 3, 24, 18, 0, 0)).step(1.hour)
+  end
+
+
+
+  # def new
+  #   @recruiters = User.where(role: "Recruiter")
+  #   @campaign = Campaign.new
+  #   @start_dates = []
+  #   @end_dates = []
+  #   start_time = Time.new(2023, 3, 20, 9, 0, 0)
+  #   end_time = Time.new(2023, 3, 24, 18, 0, 0)
+  #   while start_time <= end_time
+  #     @start_dates << start_time
+  #     @end_dates << start_time + 1.hour
+  #     start_time += 1.hour
+  #   end
+  # end
 
   def show
     @campaign = Campaign.find(params[:id])
@@ -44,7 +62,7 @@ class CampaignsController < ApplicationController
     @user = current_user
     @campaign.user_id = @user.id
     puts "User IDs: #{params[:campaign][:user_ids]}"
-
+    raise
     if @campaign.save
 
     else
