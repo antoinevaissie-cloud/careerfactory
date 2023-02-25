@@ -8,7 +8,7 @@ class ChooseRecruitersController < ApplicationController
   def create
     @recruiter = ChooseRecruiter.new(recruiter_params)
     if @recruiter.valid?
-      session[:campaign][:user_ids] = @recruiter.user_ids
+      session[:campaign][:user_ids] = @recruiter.user_ids.compact_blank
 
       redirect_to new_choose_time_path
     else
