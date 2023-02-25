@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import ByebyeController from "./byebye_controller"
+application.register("byebye", ByebyeController)
+
 import CardsController from "./cards_controller"
 application.register("cards", CardsController)
 
@@ -15,3 +18,6 @@ application.register("show-bookings", ShowBookingsController)
 
 import TypedController from "./typed_controller"
 application.register("typed", TypedController)
+
+import AllCheckboxesController from "./all_checkboxes_controller"
+application.register("all-checkboxes", AllCheckboxesController)

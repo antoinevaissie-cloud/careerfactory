@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_21_194907) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_25_095230) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -48,11 +48,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_21_194907) do
     t.integer "calendly_booking_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "campaign_id"
     t.bigint "recruiter_id"
     t.bigint "candidate_id"
     t.datetime "start_time"
     t.datetime "end_time"
+    t.text "candidate_motivation"
+    t.bigint "campaign_id", null: false
     t.index ["campaign_id"], name: "index_bookings_on_campaign_id"
     t.index ["candidate_id"], name: "index_bookings_on_candidate_id"
     t.index ["recruiter_id"], name: "index_bookings_on_recruiter_id"
@@ -99,6 +100,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_21_194907) do
     t.string "company"
     t.bigint "company_id"
     t.string "cal_link"
+    t.string "cal_api_key"
     t.index ["company_id"], name: "index_users_on_company_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

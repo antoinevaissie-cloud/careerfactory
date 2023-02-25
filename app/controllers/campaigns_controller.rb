@@ -1,46 +1,24 @@
 class CampaignsController < ApplicationController
+
+
+
   def index
     @campaigns = Campaign.all
   end
 
   def new
     @recruiters = User.where(role: "Recruiter")
-
     @campaign = Campaign.new
     @start_dates = []
     @end_dates = []
-
     start_time = Time.new(2023, 3, 20, 9, 0, 0)
     end_time = Time.new(2023, 3, 24, 18, 0, 0)
-
     while start_time <= end_time
       @start_dates << start_time
       @end_dates << start_time + 1.hour
-
       start_time += 1.hour
     end
   end
-
-
-
- # def show
-   # @campaign = Campaign.find(params[:id])
-
-    # Get the list of candidate and recruiter users
-  #  @students = User.where(role: 'Student', batch_number: @campaign.batch_number)
- #   @recruiters = @campaign.users.where(role: 'Recruiter')
-#
-#  end
-
- # def current_campaign_recruiters
-   # current_campaign = Campaign.find(params[:id])
-   # @recruiters = current_campaign.users.where(role: "recruiter")
-   # @recruiters.each do |recruiter|
-  #    puts recruiter.full_name_and_company
- #   end
-#  end
-
-
 
   def show
     @campaign = Campaign.find(params[:id])

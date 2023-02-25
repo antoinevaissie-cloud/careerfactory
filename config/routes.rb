@@ -8,7 +8,10 @@ Rails.application.routes.draw do
 
   # config/routes.rb
   resources :campaigns, only: [:create, :new, :edit, :index, :show]
-
+  get '/home', to: 'campaigns#home'
+  get '/campaigns/choose_batch', to: 'campaigns#choose_batch', as: 'choose_batch'
+  get '/campaigns/choose_recruiters', to: 'campaigns#choose_recruiters', as: 'choose_recruiters'
+  get '/campaigns/choose_times', to: 'campaigns#choose_times', as: 'choose_times'
 
   #As a candidate I can see all recruiters of the campaign
   get "campaigns/:campaign_id/recruiters", to: "recruiters#index", as: "recruiters"
@@ -23,5 +26,5 @@ resources :campaigns do
       resources :users, only: [:index], as: :recruiters
   end
 =end
-
+  post "cal_endpoint", to: 'bookings#handle_cal_webhook'
 end
