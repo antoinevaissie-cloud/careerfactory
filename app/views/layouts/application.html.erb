@@ -11,7 +11,9 @@
   </head>
 
   <body>
-    <%= render 'shared/navbar' unless params[:controller] == 'bookings' && params[:action] == 'index' %>
+    <% if user_signed_in? %>
+      <%= render 'shared/navbar' unless params[:controller] == 'bookings' && params[:action] == 'index' %>
+    <% end  %>
     <%= render "shared/flashes" %>
     <%= yield %>
   </body>

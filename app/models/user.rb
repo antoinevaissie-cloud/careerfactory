@@ -37,5 +37,27 @@ class User < ApplicationRecord
     company&.name&.downcase
   end
 
+  def initials
+    if first_name && last_name
+      "#{first_name[0]}#{last_name[0]}"
+    else
+      "AA"
+    end
+  end
+
+  def initials_color
+    color_values = [
+      0, # red
+      128, # green
+      255, # blue
+    ]
+    if first_name && last_name
+      initials_sum = first_name[0].ord + last_name[0].ord
+    else
+      initials_sum = 3
+    end
+    color_index = initials_sum % color_values.length
+    "rgb(#{color_values[color_index]}, #{color_values[(color_index + 1) % color_values.length]}, #{color_values[(color_index + 2) % color_values.length]})"
+  end
 
 end
