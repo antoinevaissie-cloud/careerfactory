@@ -40,15 +40,15 @@ class CampaignsController < ApplicationController
 
   def show
     @campaign = Campaign.find(params[:id])
-    @students = User.where(role: 'Student', batch_number: @campaign.batch_number)
-    @recruiters = @campaign.users.where(role: 'Recruiter')
+    @students = User.where(role: 'student', batch_number: @campaign.batch_number)
+    @recruiters = @campaign.users.where(role: 'recruiter')
     @current_campaign_recruiters = current_campaign_recruiters
   end
 
 
   def current_campaign_recruiters
     current_campaign = Campaign.find(params[:id])
-    current_campaign.users.where(role: 'Recruiter')
+    current_campaign.users.where(role: 'recruiter')
   end
 
 

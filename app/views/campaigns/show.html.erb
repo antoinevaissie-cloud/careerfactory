@@ -4,12 +4,13 @@
     <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Home</button>
   </li>
   <li class="nav-item" role="presentation">
-    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Profile</button>
+    <button class="nav-link" id="student-tab" data-bs-toggle="tab" data-bs-target="#student" type="button" role="tab" aria-controls="student" aria-selected="false">Students</button>
   </li>
   <li class="nav-item" role="presentation">
-    <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Contact</button>
+    <button class="nav-link" id="booking-tab" data-bs-toggle="tab" data-bs-target="#booking" type="button" role="tab" aria-controls="booking" aria-selected="false">Bookings</button>
   </li>
 </ul>
+
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
     <% @current_campaign_recruiters.each do |recruiter| %>
@@ -27,23 +28,24 @@
       </div>
     <% end %>
   </div>
-  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-    <% @current_campaign_recruiters.each do |recruiter| %>
+  <div class="tab-pane fade" id="student" role="tabpanel" aria-labelledby="student-tab">
+    <% @students.each do |student| %>
+
       <div class="general-index-card">
         <div class="general-index-card-img-container">
-          <% if recruiter.company.photo.attached? %>
-            <%= cl_image_tag recruiter.company.photo.key %>
+          <% if student.company.photo.attached? %>
+            <%= cl_image_tag student.company.photo.key %>
           <% else %>
-            <%= image_tag "no_photo.png" %>
+            <%= student.initial %>
           <% end %>
         </div>
         <div class="general-index-card-description-container">
-          <%= recruiter.full_name_and_company %>
+          <%= student.first_name  %>
         </div>
       </div>
     <% end %>
   </div>
-  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+  <div class="tab-pane fade" id="booking" role="tabpanel" aria-labelledby="booking-tab">
     <% @current_campaign_recruiters.each do |recruiter| %>
       <div class="general-index-card">
         <div class="general-index-card-img-container">
