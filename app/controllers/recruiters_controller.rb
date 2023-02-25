@@ -10,4 +10,8 @@ class RecruitersController < ApplicationController
       @recruiters = User.where(role: "Recruiter")
     end
   end
+
+  def show
+    @recruiter = User.find(params[:id])
+  end
 end
