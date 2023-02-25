@@ -1,7 +1,5 @@
 <div class="row">
   <div class="col-8">
-    <div class="main-container">
-      <div class="results-container">
         <%= simple_form_for @batch do |f| %>
             <div class="card">
             <%= f.input :batch_number,
@@ -10,15 +8,15 @@
               collection_wrapper_class: 'category-wrapper',
               item_wrapper_class: 'category-item',
               input_html: {class: 'category-selector'},
-              collection: @batch_numbers, label:"Pick a batch number"%>
-              <%= f.button :submit, class: "btn btn-primary", button_html: { class: "btn btn-primary" } %>
-
-            <% end %>
+              collection: @batch_numbers%>
             </div>
-      </div>
+    <div class="row col-12">
+      <%= f.button :submit, class: "btn btn-primary", value: "Next, choose recruiters" %>
     </div>
   </div>
-  <div class="col-4 photo-container">
+  <div class="col-4 card">
     <%= image_tag "classroom2.jpg"%>
   </div>
+
+<% end %>
 </div>

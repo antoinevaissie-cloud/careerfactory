@@ -28,4 +28,7 @@ resources :campaigns do
   end
 =end
   post "cal_endpoint", to: 'bookings#handle_cal_webhook'
+
+  get 'recruiters/:id', to: 'recruiters#show', as: 'recruiter'
+
 end
