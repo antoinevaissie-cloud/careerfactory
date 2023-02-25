@@ -6,7 +6,6 @@ class RecruitersController < ApplicationController
       @recruiters = current_campaign.users
 
       @slot_size_in_min = "#{current_campaign.slot_size}min"
-
     else
       @recruiters = User.where(role: "Recruiter")
     end

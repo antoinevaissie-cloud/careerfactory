@@ -4,11 +4,29 @@ User.destroy_all
 Company.destroy_all
 
 require 'csv'
-=begin
-CSV.foreach(Rails.root.join('db', 'users.csv'), headers: true) do |row|
-  next if row['email'].blank?
-  puts "Processing row: #{row.inspect}"
 
+student_email = "lewagon"
+companies = ["Wiz","Teradata","Salesforce","Palo Alto Networks","Netapp","Mongodb","Linkedin","Instagram","Gitlab","Elastic","Datadog","Databricks","Collibra","Apple","Aiven","Optimizely","Zoominfo","Quantum Metric","Exabeam","Broadcom","Climate Engine","Trax","Carto","Liveramp","Crux","Zebra","Vimeo","Planet","Sensormatic", "Le Wagon"]
+photos = ["wiz.png","teradata.png","salesforce.png","paloaltonetworks.png","netapp.png","mongodb.png","linkedin.png","instagram.png","gitlab.png","elastic.png","datadog.png","databricks.png","collibra.png","apple.png","aiven.png","optimizely.png","zoominfo.png","quantummetric.png","exabeam.png","broadcom.png","climateengine.png","trax.png","carto.png","liveramp.png","crux.png","zebra.png","vimeo.png","planet.png","sensormatic.png","lewagon.png"]
+first_names = ["clay", "burt", "kelly", "mike", "bruce", "leon"]
+last_names = ["power", "ducourty", "skelly", "everhard", "johnson", "durand"]
+
+batch_number = [1001, 1002, 1003]
+#create companies
+
+companies.each_with_index do |name, index|
+  company = Company.create!(name: name)
+  photo_path = File.join(Rails.root, "/public/seed/#{photos[index] || 'lol.png'}")
+  company.photo.attach(io: File.open(photo_path), filename: 'company photo', content_type: 'image/*') if File.exist?(photo_path)
+end
+
+count = 0
+CSV.foreach(Rails.root.join('db', 'users.csv'), headers: true) do |row|
+  break if count >= 100
+  next if row['email'].blank?
+
+  puts "Processing row: #{row.inspect}"
+  count += 1
   user = User.new(
     email: row['email'],
     password: row['password'],
@@ -21,112 +39,104 @@ CSV.foreach(Rails.root.join('db', 'users.csv'), headers: true) do |row|
     last_name: row['last_name'],
     role: row['role'],
     batch_number: row['batch_number'],
-    company: row['company']
+    company: Company.all.sample
   )
   user.save!
 end
-=end
 
 
-student_email = "lewagon"
-companies = ["Wiz","Teradata","Salesforce","Palo Alto Networks","Netapp","Mongodb","Linkedin","Instagram","Gitlab","Elastic","Datadog","Databricks","Collibra","Apple","Aiven","Optimizely","Zoominfo","Quantum Metric","Exabeam","Broadcom","Climate Engine","Trax","Carto","Liveramp","Crux","Zebra","Vimeo","Planet","Sensormatic", "Le Wagon"]
-photos = ["wiz.png","teradata.png","salesforce.png","paloaltonetworks.png","netapp.png","mongodb.png","linkedin.png","instagram.png","gitlab.png","elastic.png","datadog.png","databricks.png","collibra.png","apple.png","aiven.png","optimizely.png","zoominfo.png","quantummetric.png","exabeam.png","broadcom.png","climateengine.png","trax.png","carto.png","liveramp.png","crux.png","zebra.png","vimeo.png","planet.png","sensormatic.png","lewagon.png"]
-first_names = ["clay", "burt", "kelly", "mike", "bruce", "leon"]
-last_names = ["power", "ducourty", "skelly", "everhard", "johnson", "durand"]
-
-batch_number = [1001,1002,1003]
-#create companies
-
-companies.each_with_index do |name, index|
-  company = Company.create!(name: name)
-  photo_path = File.join(Rails.root, "/public/seed/#{photos[index] || 'lol.png'}")
-  company.photo.attach(io: File.open(photo_path), filename: 'company photo', content_type: 'image/*') if File.exist?(photo_path)
+User.where(role: 'recruiter').each_with_index do |recruiter, index|
+  photo_num = (index + 1) % 12
+  photo_path = File.join(Rails.root, "/public/seed/student#{photo_num + 1}.jpeg")
+  recruiter.avatar.attach(io: File.open(photo_path), filename: "recruiter_#{index + 1}.jpeg", content_type: 'image/*')
 end
-
 
 #create batch managers
 
-3.times do |n|
-  first_name = first_names.sample
-  last_name = last_names.sample
-  company = Company.find_by(name: "Le Wagon")
-  email = "#{first_name}.#{last_name}@lewagon.com"
+# 3.times do |n|
+#   first_name = first_names.sample
+#   last_name = last_names.sample
+#   company = Company.find_by(name: "Le Wagon")
+#   email = "#{first_name}.#{last_name}@lewagon.com"
 
-  User.create(
-    email: email,
-    password: "123456",
-    first_name: first_name,
-    last_name: last_name,
-    role: "Manager",
-    company: company
-  )
+#   User.create(
+#     email: email,
+#     password: "123456",
+#     first_name: first_name,
+#     last_name: last_name,
+#     role: "Manager",
+#     company: company
+#   )
+# end
 
+# User.create(
+#   email: "user1@gmail.com",
+#   password: "123456",
+#   first_name: "super",
+#   last_name: "batch_manager",
+#   role: "Manager",
+#   company: Company.find_by(name: "Le Wagon")
+# )
 
-end
+# batch_manager = User.where(role: "Manager").last
 
-User.create(
-  email: "user1@gmail.com",
-  password: "123456",
-  first_name: "super",
-  last_name: "batch_manager",
-  role: "Manager",
-  company: Company.find_by(name: "Le Wagon")
-)
+# #Create recruiters
+# 10.times do |n|
+#   first_name = first_names.sample
+#   last_name = last_names.sample
+#   company = Company.all.sample
+#   email = "#{first_name}.#{last_name}@#{company}.com"
 
-batch_manager = User.where(role: "Manager").last
-
-#Create recruiters
-10.times do |n|
-  first_name = first_names.sample
-  last_name = last_names.sample
-  company = Company.all.sample
-  email = "#{first_name}.#{last_name}@#{company}.com"
-
-  User.create(
-    email: email,
-    password: "123456",
-    first_name: first_name,
-    last_name: last_name,
-    role: "Recruiter",
-    company: company
-  )
+#   User.create(
+#     email: email,
+#     password: "123456",
+#     first_name: first_name,
+#     last_name: last_name,
+#     role: "Recruiter",
+#     company: company
+#   )
 
 
-end
+# end
 
-#create students
-30.times do |n|
-  first_name = first_names.sample
-  last_name = last_names.sample
-  company = Company.find_by(name: "Le Wagon")
-  email = "#{first_name}.#{last_name}@#{student_email}.com"
+# #create students
+# 30.times do |n|
+#   first_name = first_names.sample
+#   last_name = last_names.sample
+#   company = Company.find_by(name: "Le Wagon")
+#   email = "#{first_name}.#{last_name}@#{student_email}.com"
 
-  User.create(
-    email: email,
-    password: "123456",
-    first_name: first_name,
-    last_name: last_name,
-    role: "Student",
-    batch_number: batch_number.sample,
-    company: company
-  )
-end
+#   User.create(
+#     email: email,
+#     password: "123456",
+#     first_name: first_name,
+#     last_name: last_name,
+#     role: "Student",
+#     batch_number: batch_number.sample,
+#     company: company
+#   )
+# end
 
 #create campaigns
-5.times do |n|
+# 5.times do |n|
+#   current_campaign = Campaign.create(
+#     batch_number: batch_number.sample,
+#     start_date: "2023-01-01",
+#     end_date: "20223-01-02",
+#     slot_size: 15,
+#     user_id: batch_manager.id
+#   )
 
-  current_campaign = Campaign.create(
-    batch_number: batch_number.sample,
-    start_date: "2023-01-01",
-    end_date: "20223-01-02",
-    slot_size: 15,
-    user_id: batch_manager.id
-  )
+#   3.times do |n|
+#     CampaignUser.create(
+#       campaign_id: current_campaign.id,
+#       user_id: User.where(role: "recruiter").sample.id
+#     )
+#   end
+# end
 
-  3.times do |n|
-    CampaignUser.create(
-      campaign_id: current_campaign.id,
-      user_id: User.where(role: "Recruiter").sample.id
-    )
-  end
-end
+# User.find_by(email: 'aabdelaziz@wiz.com').update(cal_link: 'antoine-vaissi--lumxva/')
+# User.find_by(email: 'aabdelaziz@wiz.com').update(cal_api_key: 'blabla')
+# User.find_by(email: 'aabdelaziz@wiz.com').update(cal_api_key: 'blabla')
+# User.find_by(email: 'aabdelaziz@wiz.com').update(cal_api_key: 'blabla')
+# User.find_by(email: 'aabdelaziz@wiz.com').update(cal_api_key: 'blabla')
