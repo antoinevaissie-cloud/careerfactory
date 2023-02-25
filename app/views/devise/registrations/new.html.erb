@@ -10,19 +10,31 @@
               <%= f.error_notification %>
 
               <div class="form-inputs">
+                <%= f.input :first_name,
+                            required: true,
+                            autofocus: true,
+                            input_html: { }%>
+
+                <%= f.input :last_name,
+                            required: true,
+                            autofocus: true,
+                            input_html: { autocomplete: "last_name" }%>
+
                 <%= f.input :email,
                             required: true,
                             autofocus: true,
                             input_html: { autocomplete: "email" }%>
+
                 <%= f.input :password,
                             required: true,
                             hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
                             input_html: { autocomplete: "new-password" } %>
-                  <%= f.input :role, collection: %w[recruiter candidate manager], prompt: "Select Role" %>
 
                 <%= f.input :password_confirmation,
                             required: true,
                             input_html: { autocomplete: "new-password" } %>
+
+               <%= f.input :role, collection: %w[recruiter student manager], prompt: "Select Role" %>
               </div>
 
               <div class="form-actions">

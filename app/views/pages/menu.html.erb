@@ -1,6 +1,6 @@
 <% if user_signed_in? %>
   <div class="d-flex flex-column align-items-center justify-content-center" style="height: calc(100vh - 83px); background-size: cover; background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('<%= image_url("background-image.jpg") %>')">
-    <%= image_tag "careerfactory_logo.png", height: 217, width: 303  %>
+   
 
     <% if current_user.role == "manager" %>
       <div class="d-flex flex-column justify-items-between my-5">
@@ -22,12 +22,4 @@
 
   </div>
 
-<% else %>
-  <div class="banner" data-controller="byebye">
-    <div class="banner-content text-center">
-      <h1>Organising career speed dating meetings is a breeze</h1>
-      <p>Hit the button below to get started</p>
-        <%= link_to "Start now", menu_path, class: "btn btn-lg btn-primary"  %>
-    </div>
-  </div>
 <% end %>
