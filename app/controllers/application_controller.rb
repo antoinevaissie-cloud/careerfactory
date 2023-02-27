@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
 
 
 
+
   private
 
   def configure_permitted_parameters
@@ -13,11 +14,11 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
  #   raise
-    if resource.role == 'Manager'
+    if resource.role == 'manager'
       root_path
-    elsif resource.role == 'Recruiter'
+    elsif resource.role == 'recruiter'
       root_path
-    elsif resource.role == 'Student'
+    elsif resource.role == 'student'
       root_path
     else
       super
