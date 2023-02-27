@@ -3,7 +3,7 @@ class CampaignsController < ApplicationController
 
 
   def index
-    @campaigns = Campaign.all
+    @campaigns = Campaign.all.order(created_at: :desc)
   end
 
   def new

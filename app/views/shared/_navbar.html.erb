@@ -2,7 +2,7 @@
   <!-- navbar code here -->
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <div class="container-fluid">
-    <%= link_to "#", class: "navbar-brand" do %>
+    <%= link_to root_path, class: "navbar-brand" do %>
       <%= image_tag "careerfactory_logo.png" %>
     <% end %>
 
@@ -14,10 +14,14 @@
       <ul class="navbar-nav me-auto">
         <% if user_signed_in? %>
           <li class="nav-item active">
-            <%= link_to "Home", "#", class: "nav-link" %>
+            <%= link_to "Home", root_path, class: "nav-link" %>
           </li>
           <li class="nav-item">
-            <%= link_to "View my bookings", list_bookings_path(current_user.id), class: "nav-link" %>
+            <% if current_user.role == 'manager' %>
+              <%= link_to 'Campaign meetings', list_bookings_path, class: "nav-link" %>
+            <% elsif current_user.role == 'student' %>
+              <%= link_to "View my bookings", list_bookings_path, class: "nav-link" %>
+            <% end %>
           </li>
           <li class="nav-item dropdown">
             <div style="background-color: <%= current_user.initials_color %>" class="avatar dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown">
@@ -25,8 +29,15 @@
             </div>
 
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <%= link_to "Action", "#", class: "dropdown-item" %>
-              <%= link_to "Another action", "#", class: "dropdown-item" %>
+              <% if current_user.role == 'manager' %>
+                <%= link_to 'Create campaign', new_choose_batch_path, class: "dropdown-item" %>
+                <%= link_to 'My campaign stats', "#", class: "dropdown-item" %>
+              <% elsif current_user.role == 'student' %>
+                <%= link_to 'My bookings', list_bookings_path(current_user), class: "dropdown-item" %>
+                <%= link_to 'Recruiters', recruiters_path(current_user.campaigns.last), class: "dropdown-item" %>
+              <% elsif current_user.role == 'recruiter' %>
+                <%# lol %>
+              <% end %>
               <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
             </div>
           </li>

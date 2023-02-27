@@ -47,6 +47,16 @@ User.where(role: 'recruiter').each_with_index do |recruiter, index|
   recruiter.avatar.attach(io: File.open(photo_path), filename: "recruiter_#{index + 1}.jpeg", content_type: 'image/*')
 end
 
+User.where(role: 'student').each_with_index do |student, index|
+  puts "Create campaign if it doesnt exist for #{student.first_name} #{student.last_name}"
+  campaign = Campaign.find_by(batch_number: student.batch_number)
+  campaign = Campaign.create!(batch_number: student.batch_number) if campaign.nil?
+  CampaignUser.create(
+    campaign: campaign,
+    user: student
+  )
+end
+
 #create batch managers
 
 # 3.times do |n|

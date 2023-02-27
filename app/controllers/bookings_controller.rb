@@ -31,11 +31,7 @@ class BookingsController < ApplicationController
     )
   end
 
-  def list_bookings
-    if current_user.cal_api_key.present?
-      @api_key = current_user.cal_api_key
-    else
-      @api_key = current_user.role == 'Student' ? ENV['STUDENT_API_KEY'] : ENV['RECRUITER_API_KEY']
-    end
+  def index
+    @bookings = current_user.bookings
   end
 end

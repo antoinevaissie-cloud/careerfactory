@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   get "campaigns/:campaign_id/recruiters", to: "recruiters#index", as: "recruiters"
 
   #As a candidate or recruiter I can see all my bookings
-  get "bookings/:user_id/bookings", to: "bookings#list_bookings", as: "list_bookings"
+  get "bookings", to: "bookings#index", as: :list_bookings
 
   #As a recruiter I can see all students of the campaign
   get "campaigns/:campaign_id/students", to: "students#index", as: "students"

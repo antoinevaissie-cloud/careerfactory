@@ -3,62 +3,68 @@
   <li class="nav-item" role="presentation">
     <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Home</button>
   </li>
-  <li class="nav-item" role="presentation">
-    <button class="nav-link" id="student-tab" data-bs-toggle="tab" data-bs-target="#student" type="button" role="tab" aria-controls="student" aria-selected="false">Students</button>
-  </li>
-  <li class="nav-item" role="presentation">
-    <button class="nav-link" id="booking-tab" data-bs-toggle="tab" data-bs-target="#booking" type="button" role="tab" aria-controls="booking" aria-selected="false">Bookings</button>
-  </li>
+  <% if current_user.role == 'manager' %>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="student-tab" data-bs-toggle="tab" data-bs-target="#student" type="button" role="tab" aria-controls="student" aria-selected="false">Students</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="booking-tab" data-bs-toggle="tab" data-bs-target="#booking" type="button" role="tab" aria-controls="booking" aria-selected="false">Bookings</button>
+    </li>
+  <% end %>
 </ul>
 
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
     <% @current_campaign_recruiters.each do |recruiter| %>
-      <div class="general-index-card">
-        <div class="general-index-card-img-container">
-          <% if recruiter.company.photo.attached? %>
-            <%= cl_image_tag recruiter.company.photo.key %>
-          <% else %>
-            <%= image_tag "no_photo.png" %>
-          <% end %>
+      <%= link_to recruiter_path(recruiter) do %>
+        <div class="general-index-card">
+          <div class="general-index-card-img-container">
+            <% if recruiter.company.photo.attached? %>
+              <%= cl_image_tag recruiter.company.photo.key %>
+            <% else %>
+              <%= image_tag "no_photo.png" %>
+            <% end %>
+          </div>
+          <div class="general-index-card-description-container">
+            <%= recruiter.full_name_and_company %>
+          </div>
         </div>
-        <div class="general-index-card-description-container">
-          <%= recruiter.full_name_and_company %>
-        </div>
-      </div>
+      <% end %>
     <% end %>
   </div>
-  <div class="tab-pane fade" id="student" role="tabpanel" aria-labelledby="student-tab">
-    <% @students.each do |student| %>
+  <% if current_user.role == 'manager' %>
+    <div class="tab-pane fade" id="student" role="tabpanel" aria-labelledby="student-tab">
+      <% @students.each do |student| %>
 
-      <div class="general-index-card">
-        <div class="general-index-card-img-container">
-          <% if student.company.photo.attached? %>
-            <%= cl_image_tag student.company.photo.key %>
-          <% else %>
-            <%= student.initials %>
-          <% end %>
+        <div class="general-index-card">
+          <div class="general-index-card-img-container">
+            <% if student.company.photo.attached? %>
+              <%= cl_image_tag student.company.photo.key %>
+            <% else %>
+              <%= student.initials %>
+            <% end %>
+          </div>
+          <div class="general-index-card-description-container">
+            <%= student.first_name  %>
+          </div>
         </div>
-        <div class="general-index-card-description-container">
-          <%= student.first_name  %>
+      <% end %>
+    </div>
+    <div class="tab-pane fade" id="booking" role="tabpanel" aria-labelledby="booking-tab">
+      <% @current_campaign_recruiters.each do |recruiter| %>
+        <div class="general-index-card">
+          <div class="general-index-card-img-container">
+            <% if recruiter.company.photo.attached? %>
+              <%= cl_image_tag recruiter.company.photo.key %>
+            <% else %>
+              <%= image_tag "no_photo.png" %>
+            <% end %>
+          </div>
+          <div class="general-index-card-description-container">
+            <%= recruiter.full_name_and_company %>
+          </div>
         </div>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
   </div>
-  <div class="tab-pane fade" id="booking" role="tabpanel" aria-labelledby="booking-tab">
-    <% @current_campaign_recruiters.each do |recruiter| %>
-      <div class="general-index-card">
-        <div class="general-index-card-img-container">
-          <% if recruiter.company.photo.attached? %>
-            <%= cl_image_tag recruiter.company.photo.key %>
-          <% else %>
-            <%= image_tag "no_photo.png" %>
-          <% end %>
-        </div>
-        <div class="general-index-card-description-container">
-          <%= recruiter.full_name_and_company %>
-        </div>
-      </div>
-    <% end %>
-  </div>
-</div>
+<% end %>
