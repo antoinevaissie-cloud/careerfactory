@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :campaign_users
-  has_many :campaigns, through: :campaign_users
+  has_many :campaigns, ->{order(created_at: :asc)}, through: :campaign_users
   has_many :bookings_as_manager, through: :campaigns, source: :bookings, class_name: 'Booking'
   has_many :bookings_as_candidate, class_name: 'Booking', foreign_key: :candidate_id
   has_many :bookings_as_recruiter, class_name: 'Booking', foreign_key: :recruiter_id

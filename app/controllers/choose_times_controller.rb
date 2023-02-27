@@ -12,12 +12,23 @@ class ChooseTimesController < ApplicationController
     if @time.valid?
       @campaign = Campaign.new(session[:campaign].merge(campaign_params))
       @campaign.user_id = current_user.id
+      # clear session if campaign save
 
-      redirect_to campaigns_path and return if @campaign.save
+      if @campaign.save
+        Campaign.where(batch_number: @campaign.batch_number).to_a.reject { |e| e == @campaign }.each(&:destroy)
+        User.where(role: 'student', batch_number: @campaign.batch_number).find_each do |student|
+          CampaignUser.create(
+            campaign: @campaign,
+            user: student
+          )
+        end
+        redirect_to campaign_path(@campaign)
+      end
     else
       render :new
     end
   end
+
 
   def time_params
     params.require(:choose_time).permit(:start_date, :end_date, :slot_size)
