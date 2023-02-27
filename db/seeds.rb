@@ -1,3 +1,10 @@
+# for each of the ~5 recrutiers which email is whose on cal.com so as to embed the widget
+# create the webhook on each of the cal.com accounts , webhook should point to “https://www.factory.careers/cal_endpoint”
+# to test open the local tunnel ➜  unfuck git:(master) ✗ lt -p 3000 --print-requests
+# example {https://cyan-beds-teach-104-133-236-111.loca.lt}/cal_endpoint
+
+
+
 CampaignUser.destroy_all
 Campaign.destroy_all
 User.destroy_all

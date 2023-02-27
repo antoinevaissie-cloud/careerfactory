@@ -1,4 +1,5 @@
 email,password,first_name,last_name,role,batch_number,company
+careers@lewagon.org,password123,Antoine,Vaissié,manager,,
 aabdelaziz@wiz.com,password123,A.Mahdy,Abdelaziz,recruiter,,Wiz
 abdelazizel@teradata.com,password123,Abdelaziz,El Idrissi Raja,recruiter,,Teradata
 abirboughzala@salesforce.com,password123,Abir,BOUGHZALA,recruiter,,Salesforce
@@ -404,6 +405,10 @@ thibaultpouget@lewagon.org,password123,Thibault,Pouget,student,1002,
 thibaultpanhard@lewagon.org,password123,Thibault,Panhard,student,1008,
 thomasaza@lewagon.org,password123,Thomas,Azaïs,student,1002,
 thomascliett@lewagon.org,password123,Thomas,Cliett,student,1005,
+careers@lewagon.org,password123,Antoine,Vaissié,manager,,
+careers@lewagon.org,password123,Antoine,Vaissié,manager,,
+careers@lewagon.org,password123,Antoine,Vaissié,manager,,
+careers@lewagon.org,password123,Antoine,Vaissié,manager,,
 thomasle@lewagon.org,password123,Thomas,Le Moullec,student,1005,
 timlovelock@lewagon.org,password123,Tim,Lovelock,student,1010,
 tomjorge@lewagon.org,password123,Tom,Jorge,student,1001,
@@ -429,4 +434,3 @@ younesalaoui@lewagon.org,password123,Younes,Alaoui,student,1004,
 yvescolin@lewagon.org,password123,Yves,Colin,student,1008,
 zakarialazaar@lewagon.org,password123,Zakaria,Lazaar,student,1003,
 zinebnaha@lewagon.org,password123,Zineb,Naha,student,1010,
-careers@lewagon.org,password123,Antoine,Vaissié,manager,,
