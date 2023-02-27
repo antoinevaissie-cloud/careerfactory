@@ -1,7 +1,4 @@
 class CampaignsController < ApplicationController
-
-
-
   def index
     @campaigns = Campaign.all.order(created_at: :desc)
   end
@@ -11,7 +8,6 @@ class CampaignsController < ApplicationController
   end
 
   def choose_batch
-
   end
 
   def choose_recruiters
@@ -21,8 +17,6 @@ class CampaignsController < ApplicationController
   def choose_times
     @start_times = (Time.new(2023, 3, 20, 9, 0, 0)..Time.new(2023, 3, 24, 18, 0, 0)).step(1.hour)
   end
-
-
 
   # def new
   #   @recruiters = User.where(role: "Recruiter")
@@ -43,57 +37,51 @@ class CampaignsController < ApplicationController
     @students = User.where(role: 'student', batch_number: @campaign.batch_number)
     @recruiters = @campaign.users.where(role: 'recruiter')
     @current_campaign_recruiters = current_campaign_recruiters
+    if current_user.role == 'manager'
+      @bookings = @campaign.bookings
+    end
   end
-
 
   def current_campaign_recruiters
     current_campaign = Campaign.find(params[:id])
     current_campaign.users.where(role: 'recruiter')
   end
 
-
   def edit
   end
 
+  # def create
+  #   @campaign = Campaign.new(campaign_params)
+  #   @user = current_user
+  #   @campaign.user_id = @user.id
+  #   puts "User IDs: #{params[:campaign][:user_ids]}"
+  #   raise
+  #   if @campaign.save
+
+  #   else
+  #     # render the form again with error messages
+  #     render :new
+  #   end
+
+  #   params[:campaign][:user_ids].each do |t|
+  #      @campaign_user = CampaignUser.new(
+  #        campaign_id: @campaign.id,
+  #        user_id: (t.to_i)
+  #      )
+  #      if @campaign_user.valid?
+  #        @campaign_user.save
+  #       else
+  #         puts @campaign_user.errors.full_messages
+  #       end
 
 
-  def create
-    @campaign = Campaign.new(campaign_params)
-    @user = current_user
-    @campaign.user_id = @user.id
-    puts "User IDs: #{params[:campaign][:user_ids]}"
-    raise
-    if @campaign.save
-
-    else
-      # render the form again with error messages
-      render :new
-    end
-
-    params[:campaign][:user_ids].each do |t|
-       @campaign_user = CampaignUser.new(
-         campaign_id: @campaign.id,
-         user_id: (t.to_i)
-       )
-       if @campaign_user.valid?
-         @campaign_user.save
-        else
-          puts @campaign_user.errors.full_messages
-        end
-
-
-    end
-    redirect_to campaigns_path, notice: 'Campaign was successfully created.'
-
-
-  end
-
+  #   end
+  #   redirect_to campaigns_path, notice: 'Campaign was successfully created.'
+  # end
 
   private
+
   def campaign_params
     params.require(:campaign).permit(:batch_number, :start_date, :end_date, :slot_size, :user_ids)
   end
-
-
-
 end
