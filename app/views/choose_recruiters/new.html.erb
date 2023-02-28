@@ -2,17 +2,17 @@
   <div class="row mt-5">
     <h3 class="text-center">Choose the recruiters you want to include</h3>
   </div>
-  <div class="row mt-5">
-    <div class="col-8">
-      <%= simple_form_for @recruiter do |f| %>
+  <%= simple_form_for @recruiter do |f| %>
+    <div class="row mt-5">
+      <div class="col-8">
         <%= f.collection_check_boxes :user_ids, @recruiters, :id, :full_name_and_company, {}, { class: 'tag-selector' }%>
+      </div>
+      <div class="col-4">
+        <%= image_tag "recruiters.jpg", class: 'w-100 form-side-image' %>
+      </div>
     </div>
-    <div class="col-4">
-    <%= image_tag "recruiters.jpg", class: 'w-100 form-side-image' %>
+    <div class="row mt-5 mb-5">
+      <%= f.button :submit, class: "btn btn-primary d-block mx-auto w-50", value: "Next, choose times" %>
     </div>
-  </div>
-  <div class="row mt-5 mb-5">
-        <%= f.button :submit, class: "btn btn-primary d-block mx-auto w-50", value: "Next, choose times" %>
-      <% end %>
-  </div>
+  <% end %>
 </div>

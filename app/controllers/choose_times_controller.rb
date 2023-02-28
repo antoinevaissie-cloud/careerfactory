@@ -12,6 +12,7 @@ class ChooseTimesController < ApplicationController
     if @time.valid?
       @campaign = Campaign.new(session[:campaign].merge(campaign_params))
       @campaign.user_id = current_user.id
+
       # clear session if campaign save
 
       if @campaign.save
@@ -28,7 +29,6 @@ class ChooseTimesController < ApplicationController
       render :new
     end
   end
-
 
   def time_params
     params.require(:choose_time).permit(:start_date, :end_date, :slot_size)
