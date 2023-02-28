@@ -1,0 +1,92 @@
+<div class="container mb-5">
+  <div class="col mt-5">
+    <div class="row">
+      <h1 class="mb-5 text-center">Batch <%= @campaign.batch_number %> campaign</h1>
+      <ul class="nav nav-tabs justify-content-center mb-3" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Home</button>
+        </li>
+
+        <% if current_user.role == 'manager' %>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="student-tab" data-bs-toggle="tab" data-bs-target="#student" type="button" role="tab" aria-controls="student" aria-selected="false">Students</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="booking-tab" data-bs-toggle="tab" data-bs-target="#booking" type="button" role="tab" aria-controls="booking" aria-selected="false">Bookings</button>
+          </li>
+        <% end %>
+
+      </ul>
+
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+          <% @current_campaign_recruiters.each do |recruiter| %>
+            <%= link_to recruiter_path(recruiter) do %>
+              <div class="general-index-card">
+                <div class="general-index-card-img-container">
+                  <% if recruiter.company.photo.attached? %>
+                    <%= cl_image_tag recruiter.company.photo.key %>
+                  <% else %>
+                    <%= image_tag "no_photo.png" %>
+                  <% end %>
+                </div>
+                <div class="general-index-card-description-container">
+                  <%= recruiter.full_name_and_company %>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+
+        <% if current_user.role == 'manager' %>
+          <div class="tab-pane fade" id="student" role="tabpanel" aria-labelledby="student-tab">
+            <% @students.each do |student| %>
+              <div class="general-index-card">
+                <div class="general-index-card-img-container">
+                  <% if student.company.photo.attached? %>
+                    <%= cl_image_tag student.company.photo.key %>
+                  <% else %>
+                    <%= student.initials %>
+                  <% end %>
+                </div>
+                <div class="general-index-card-description-container">
+                  <%= student.first_name  %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+          <div class="tab-pane fade" id="booking" role="tabpanel" aria-labelledby="booking-tab">
+            <div class="row justify-content-evenly">
+              <% @bookings.each do |booking| %>
+                <div class="card mb-3 card-booking" style="max-width: 540px;">
+                  <div class="card-header"><%= booking.recruiter.company.name %></div>
+                  <div class="row g-0">
+                    <div class="col-md-4 align-items-center d-flex">
+                      <% if booking.recruiter.company.photo.attached? %>
+                        <%= cl_image_tag booking.recruiter.company.photo.key, class: "img-fluid rounded-start" %>
+                      <% else %>
+                        <%= image_tag "no_photo.png", class: "img-fluid rounded-start" %>
+                      <% end %>
+                    </div>
+                    <div class="col-md-8">
+                      <div class="card-body">
+                        <h5 class="card-title"><%= booking.recruiter.full_name %> x <%= booking.candidate.full_name %></h5>
+                        <p class="card-text"><small class="text-muted"><%= booking.start_time.strftime('%I:%M%p') %> (<%= @campaign.slot_size %>mn)</small></p>
+                        <p class="card-text">Candidate motivation: <%= booking.candidate_motivation %></p>
+                        <% if current_user.role == "manager" %>
+                          <%= link_to "Resquest candidate feedback", '#', class: "btn btn-outline-primary btn-sm mb-1 w-100 #{'disabled' if booking.end_time > DateTime.now}" %>
+                          <%= link_to "Resquest recruiter feedback", '#', class: "btn btn-outline-primary btn-sm mb-1 w-100 #{'disabled' if booking.end_time > DateTime.now}" %>
+                        <% end %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+</div>

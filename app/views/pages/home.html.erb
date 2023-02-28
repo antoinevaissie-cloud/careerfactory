@@ -1,6 +1,5 @@
 <% if user_signed_in? %>
-  <div class="d-flex flex-column align-items-center justify-content-center" style="height: calc(100vh - 83px); background-size: cover; background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('<%= image_url("background-image.jpg") %>')">
-    <%= image_tag "careerfactory_logo.png", height: 217, width: 303  %>
+  <div class="d-flex flex-column align-items-center justify-content-center" style="height: calc(100vh - 83px); background-size: cover; background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('<%= image_url("forest.jpg") %>')">
 
     <% if current_user.role == "manager" %>
       <div class="d-flex flex-column justify-items-between my-5">
