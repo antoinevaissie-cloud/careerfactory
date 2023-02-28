@@ -22,7 +22,7 @@
         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
           <div class="row">
             <% @current_campaign_recruiters.each do |recruiter| %>
-              <div class="col-md-4 mb-3">
+              <div class="col-md-6 mb-3">
                 <div class="card-product d-flex">
                   <div class="card-product-img">
                     <%= link_to recruiter_path(recruiter) do %>
@@ -36,6 +36,9 @@
                   <div class="card-product-infos flex-grow-1">
                     <div class="h2"><%= recruiter.full_name_and_company %></div>
                     <p>"<strong><%= recruiter.tagline %></strong>"</p>
+                    <div class="d-flex justify-content-end">
+                      <%= link_to "View Profile", recruiter_path(recruiter), class: "btn btn-primary ms-auto mt-3" %>
+                    </div>
                   </div>
                 </div>
               </div>
