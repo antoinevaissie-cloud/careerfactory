@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-8">
+      <%= simple_form_for @recruiter do |f| %>
+        <div class="row">
+          <% @recruiters.each do |recruiter| %>
+            <div class="col-md-4 mb-3">
+              <div class="card-product d-flex">
+                <div class="card-product-img">
+                  <%= link_to recruiter_path(recruiter) do %>
+                    <% if recruiter.company.photo.attached? %>
+                      <%= cl_image_tag recruiter.company.photo.key %>
+                    <% else %>
+                      <%= image_tag "no_photo.png" %>
+                    <% end %>
+                  <% end %>
+                </div>
+                <div class="card-product-infos flex-grow-1">
+                  <div class="h2"><%= recruiter.full_name_and_company %></div>
+                  <p>"<strong><%= recruiter.tagline %></strong>"</p>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+        <%= f.button :submit, class: "btn btn-primary d-block mx-auto w-50", value: "Next, choose times" %>
+      <% end %>
+    </div>
+    <div class="col-4">
+      <%= image_tag "recruiters.jpg", class: 'w-100 form-side-image' %>
+    </div>
+  </div>
+</div>

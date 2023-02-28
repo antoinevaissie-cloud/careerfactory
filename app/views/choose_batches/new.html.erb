@@ -1,20 +1,26 @@
 <div class="container">
   <div class="row mt-5">
+    <h3 class="text-center">Choose the student batch</h3>
+  </div>
+  <div class="row mt-5">
     <div class="col-8">
-      <%= simple_form_for @batch do |f| %>
-        <%= f.input :batch_number,
-                    as: :radio_buttons,
-                    legend_tag: false,
-                    collection_wrapper_tag: 'div',
-                    collection_wrapper_class: 'category-wrapper',
-                    item_wrapper_class: 'category-item',
-                    input_html: {class: 'category-selector'},
-                    collection: @batch_numbers %>
-        <%= f.button :submit, class: "btn btn-primary d-block mx-auto w-50", value: "Next, choose recruiters" %>
-      <% end %>
+<%= simple_form_for @batch do |f| %>
+  <%= f.input :batch_number,
+              as: :radio_buttons,
+              legend_tag: false,
+              collection_wrapper_class: 'category-wrapper',
+              item_wrapper_class: 'category-item',
+              input_html: {class: 'category-selector tag-selector'},
+              collection: @batch_numbers %>
+
+
     </div>
     <div class="col-4">
       <%= image_tag "classroom2.jpg", class: 'w-100 form-side-image' %>
     </div>
+  </div>
+    <div class="row mt-5 mb-5">
+        <%= f.button :submit, class: "btn btn-primary d-block mx-auto w-50", value: "Next, choose recruiters" %>
+      <% end %>
   </div>
 </div>
