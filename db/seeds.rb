@@ -35,7 +35,8 @@ CSV.foreach(Rails.root.join('db', 'users.csv'), headers: true) do |row|
     last_name: row['last_name'],
     role: row['role'],
     batch_number: row['batch_number'],
-    company: Company.all.sample
+    company: Company.find_or_create_by(name: row['company'])
+
   )
   user.save!
 end
@@ -97,3 +98,6 @@ end
   user: student
   )
   end
+
+
+User.find_by(email:"agathedubou@instagram.com").update(cal_link: "agathe-duboue")

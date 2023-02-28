@@ -19,7 +19,7 @@
         <div class="dashboard-card main">
           <div class="dashboard-card-content">
             <img src="images/student1.jpeg" alt="" width="150" class="img-circle">
-            <h2>Bruce Power</h2>
+            <h2><%= @recruiter.full_name %></h2>
             <p>Technical recruiter at Planet</p>
             <!-- Cal element-click embed code begins -->
             <script type="text/javascript">
@@ -30,7 +30,7 @@
             Cal("ui", {"styles":{"branding":{"brandColor":"#000000"}},"hideEventTypeDetails":false});
             </script>
             <!-- Cal element-click embed code ends -->
-            <span class="btn btn-primary btn-lg" data-cal-link="www.cal.com/email-a/30mn">Book a meeting</span>
+            <span class="btn btn-primary btn-lg" data-cal-link="<%= @recruiter.cal_link %>/<%= "#{@recruiter.campaigns.last&.slot_size}min" || "15min" %>">Book a meeting</span>
           </div>
         </div>
         <div class="dashboard-card stat">
