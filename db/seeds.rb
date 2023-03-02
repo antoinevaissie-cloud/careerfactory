@@ -53,8 +53,8 @@ CSV.foreach(Rails.root.join('db', 'users.csv'), headers: true) do |row|
     last_name: row['last_name'],
     role: row['role'],
     batch_number: row['batch_number'],
-    company: Company.find_or_create_by(name: row['company'])
-
+    company: Company.find_or_create_by(name: row['company']),
+    cal_link: row['cal_link']
   )
   user.save!
 end
@@ -227,14 +227,14 @@ User.where(role: 'student').limit(20).each_with_index do |student, index|
 student.update(tagline: student_pitch_lines[index])
 end
 
-User.where(role: 'student', batch_number: 1000).each_with_index do |student, index|
+User.where(role: 'student').order(last_name: :asc).each_with_index do |student, index|
   photo_num = (index + 1) % 20
   photo_path = File.join(Rails.root, "/public/seed/student#{photo_num + 1}.jpeg")
   student.avatar.attach(io: File.open(photo_path), filename: "student_#{index + 1}.jpeg", content_type: 'image/*')
 end
 
 
-User.where(role: 'recruiter').each_with_index do |recruiter, index|
+User.where(role: 'recruiter').order(last_name: :asc).each_with_index do |recruiter, index|
 photo_num = (index + 1) % 18
 photo_path = File.join(Rails.root, "/public/seed/recruiter#{photo_num + 1}.jpeg")
 recruiter.avatar.attach(io: File.open(photo_path), filename: "recruiter_#{index + 1}.jpeg", content_type: 'image/*')
@@ -249,6 +249,3 @@ campaign: campaign,
 user: student
 )
 end
-
-
-User.find_by(email:"adrienc@paloaltonetworks.com").update(cal_link: "adrien-ceron")
