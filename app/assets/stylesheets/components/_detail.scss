@@ -1,0 +1,123 @@
+.circular {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  background-color: red;
+}
+
+
+.img-container{
+    width:100%;
+    height: 250px;
+    object-fit: cover;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+  }
+
+.ringo-item {
+  display: inline-block;
+}
+
+.ringo-selector {
+  position: absolute;
+  transform: scale(0);
+}
+
+.ringo-selector + label {
+  cursor: pointer;
+  display: inline-block;
+  font-size: 0.7rem;
+  border-radius: 50rem;
+  padding: 0.1rem 0.5rem;
+  background-color: #ECEAFF;
+  color: #7E73FF;
+  border: 1px solid #7E73FF;
+  margin-right: 0.6rem;
+  margin-bottom: 0.4rem;
+}
+
+.ringo-selector:checked + label {
+  background-color: #7E73FF;
+  color: white;
+}
+
+.detail {
+  display: grid;
+  grid-template-columns: 300px 1fr 2fr;
+  grid-template-rows: 50% 50%;
+  height: calc(100vh - 110px);
+  margin-top: 20px;
+}
+.detail .main {
+  grid-row: 1 / span 2;
+  grid-column: 1 / span 1;
+}
+.detail .description {
+  grid-row: 2 / span 1;
+  grid-column: 2 / span 3;
+}
+.detail-card {
+  background: white;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  padding: 10px;
+  margin: 10px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+@media (max-width: 992px) {
+  .detail {
+    display: block;
+  }
+}
+
+/* Fonts and colors */
+.detail h2 {
+  font-size: 25px;
+}
+.detail h3 {
+  color: #37B686;
+  font-size: 25px;
+  margin-bottom: 15px;
+}
+.detail p {
+  color: rgba(0,0,0,0.5);
+  font-size: 16px;
+}
+.detail img {
+  border-radius: 50%;
+}
+.detail .btn {
+  border-radius: 5px;
+  border: none;
+  width: 100%;
+  margin-top: 30px;
+  background: #37B686;
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  padding: 15px 20px;
+}
+.detail .btn:hover {
+  background: #37B686;
+  opacity: 0.7;
+}
+.main p {
+  margin-bottom: 30px;
+}
+
+.detail-card-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; // Add this rule to ensure that the image doesn't overflow
+}
+
+.detail-card-content img {
+  max-width: 80px; // Add this rule to ensure that the image fits within the container
+  height: auto;
+  object-fit: cover;
+}

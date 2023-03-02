@@ -1,7 +1,8 @@
 <div class="container">
   <div class="row mt-5">
     <h3 class="text-center">Choose the date and the time of the speed meeting</h3>
-
+  </div>
+  <div class="row mt-5">
     <div class="col-8">
       <%= simple_form_for @time,
                         html: {
@@ -9,10 +10,6 @@
                             controller: 'flatpickr'
                           }
                         } do |f| %>
-        <div class="steps">
-          <h5>Pick a start date and a start time</h5>
-        </div>
-
         <%= f.input :start_date,  as: :string,
                   input_html: {
                     data: {
@@ -20,9 +17,6 @@
                     }
                   }
          %>
-        <div class="steps">
-          <h3>Pick an end date and an end time</h3>
-        </div>
         <%= f.input :end_date, as: :string,
                   input_html: {
                     data: {
@@ -30,20 +24,15 @@
                     }
                   }
         %>
-        <div class="steps">
-          <h3>Choose the slot size</h3>
-        </div>
         <%= f.input :slot_size, collection: [15, 30], label: "Slot Size (minutes)", as: :select %>
-    </div>
 
+      </div>
       <div class="col-4">
         <%= image_tag "times.jpg", class: 'w-100 form-side-image' %>
       </div>
-
-      <div class="row mt-5 mb-5">
-        <%= f.button :submit, class: "btn btn-primary d-block mx-auto w-50", value: "Create campaign!" %>
-      </div>
-    <% end %>
   </div>
-
+  <div class="row mt-5 mb-5">
+    <%= f.button :submit, class: "btn btn-primary d-block mx-auto w-50", value: "Create campaign!" %>
+  </div>
+  <% end %>
 </div>

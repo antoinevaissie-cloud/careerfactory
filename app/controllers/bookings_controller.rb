@@ -11,6 +11,10 @@ class BookingsController < ApplicationController
   def create
   end
 
+  def convert_to_utc_plus_one(datetime)
+    datetime.in_time_zone('UTC+1').strftime('%Y-%m-%d %H:%M:%S')
+  end
+
   def handle_cal_webhook
     recruiter_email = params.dig('payload', 'organizer', 'email')
     recruiter = User.find_by(email: recruiter_email)
@@ -64,5 +68,10 @@ class BookingsController < ApplicationController
 
   def index
     @bookings = current_user.bookings
+    @bookings.each do |booking|
+      booking.start_time = booking.start_time.in_time_zone("Europe/Paris").strftime("%Y-%m-%d %H:%M:%S")
+      booking.end_time = booking.end_time.in_time_zone("Europe/Paris").strftime("%Y-%m-%d %H:%M:%S")
+    end
   end
+
 end
