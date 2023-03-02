@@ -1,57 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Dashboard</title>
-    <link rel="stylesheet" href="css/style.css">
-  </head>
-  <body>
-
-    <div class="navbar-minimal">
-      <img src="images/logo.png">
-    </div>
 
     <div class="container">
+      <div class="detail">
+        <div class="detail-card main">
+          <div class="detail-card-content">
+            <%= cl_image_tag @avatar_key, class: "rounded-circle", style: "margin-bottom: 20px;" %>
 
-      <div class="dashboard">
-        <div class="dashboard-card main">
-          <div class="dashboard-card-content">
-            <img src="images/seb.jpeg" alt="" width="150" class="img-circle">
-            <h2>Sebastien Saunier</h2>
-            <p>CTO at Le Wagon</p>
-            <a href="#" class="btn btn-primary btn-lg">Get in touch</a>
+            <h3><%= @recruiter.full_name %></h3>
+            <p>Recruiting developpers for <%= @company.name %></p>
+            <a href="www.cal.com/email-a/30mn" class="btn btn-primary btn-lg">Book a meeting</a>
           </div>
         </div>
-        <div class="dashboard-card stat">
-          <div class="dashboard-card-content">
-            <h3>3,536</h3>
-            <p>contributions</p>
+        <div class="detail-card stat">
+          <div class="detail-card-content">
+            <h3>Stack</h3>
+              <ul>
+                <% @skills_array.each do |skill| %>
+                  <li><%= skill %></li>
+                <% end %>
+              </ul>
           </div>
         </div>
-        <div class="dashboard-card stat">
-          <div class="dashboard-card-content">
-            <h3>758</h3>
-            <p>followers</p>
+        <div class="detail-card stat">
+          <div class="detail-card-content">
+            <h3>Looking for candidates with:</h3>
+              <p class="text-justify">
+                <%= @recruiter.looking_for %>
+              </p>
           </div>
         </div>
-        <div class="dashboard-card stat">
-          <div class="dashboard-card-content">
-            <h3>119</h3>
-            <p>repositories</p>
-          </div>
-        </div>
-        <div class="dashboard-card description">
-          <div class="dashboard-card-content">
-            <h3>More about Sebastien</h3>
+
+        <div class="detail-card description">
+          <div class="detail-card-content">
+            <h3>More about <%= @recruiter.first_name %></h3>
             <p class="text-justify">
-              I am a full-stack developer with 9 years of experience working in startups.
+              Are you looking to build a successful career in web development with a company that truly values its employees? I'm here to help! With my passion for web development and my deep understanding of the industry, I specialize in connecting talented developers with the best companies out there. I'm dedicated to helping you find the perfect job to fit your skills and passion, and I'm always on the lookout for the best and brightest developers out there. With my help, you can take your career to the next level and achieve your goals in web development.
             </p>
           </div>
         </div>
       </div>
     </div>
-
-  </body>
-</html>

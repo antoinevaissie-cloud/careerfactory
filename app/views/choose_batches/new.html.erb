@@ -5,13 +5,14 @@
   <%= simple_form_for @batch do |f| %>
     <div class="row mt-5">
       <div class="col-8">
-          <%= f.input :batch_number,
-                      as: :radio_buttons,
-                      legend_tag: false,
-                      collection_wrapper_class: 'category-wrapper',
-                      item_wrapper_class: 'category-item',
-                      input_html: {class: 'category-selector tag-selector'},
-                      collection: @batch_numbers %>
+        <%= f.label :batch_number, "Batch number:" %>
+        <%= f.input :batch_number,
+                    as: :radio_buttons,
+                    legend_tag: false,
+                    collection_wrapper_class: 'category-wrapper',
+                    item_wrapper_class: 'category-item',
+                    input_html: {class: 'category-selector tag-selector',value: "Batch number: #{f.object.batch_number}"},
+                    collection: @batch_numbers %>
       </div>
       <div class="col-4">
         <%= image_tag "classroom2.jpg", class: 'w-100 form-side-image' %>

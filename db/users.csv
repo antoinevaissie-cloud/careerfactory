@@ -1,12 +1,12 @@
-email,password,first_name,last_name,role,batch_number,company
+email,password,first_name,last_name,role,batch_number,company,cal_link
 careers@lewagon.org,password123,Antoine,Vaissié,manager,,
-alinechoupin@quantummetric.com,password123,Aline,Choupin,recruiter,,Aiven
-aminahamadache@exabeam.com,password123,Amina Intissar,Hamadache,recruiter,,Apple
-aminehakkou@broadcom.com,password123,Amine,Hakkou,recruiter,,Broadcom
-aminemokhtari@climateengine.com,password123,Amine,Mokhtari,recruiter,,Carto
-anapirvulescu@trax.com,password123,Ana,Pirvulescu,recruiter,,Climate Engine
-anatarca@carto.com,password123,Ana-Maria,Tarca,recruiter,,Collibra
-anabelaamado@liveramp.com,password123,Anabela,Amado,recruiter,,Crux
+aline.choupin@aiven.io,password123,Aline,Choupin,recruiter,,Aiven,email-b
+email-b@factory.careers,password123,Amina Intissar,Hamadache,recruiter,,Apple,email-c
+email-c@factory.careers,password123,Amine,Hakkou,recruiter,,Broadcom,email-d
+email-d@factory.careers,password123,Amine,Mokhtari,recruiter,,Carto
+email-e@factory.careers,password123,Ana,Pirvulescu,recruiter,,Climate Engine
+email-f@factory.careers,password123,Ana-Maria,Tarca,recruiter,,Collibra
+email-g@factory.careers,password123,Anabela,Amado,recruiter,,Crux
 annecaillot@crux.com,password123,Anne-elisabeth,Caillot,recruiter,,Databricks
 annegiret@zebra.com,password123,Anne-Laure,Giret,recruiter,,Datadog
 anneperraut@vimeo.com,password123,Anne-Marie,Perraut,recruiter,,Elastic
@@ -17,7 +17,7 @@ abdelazizel@teradata.com,password123,Abdelaziz,El Idrissi Raja,recruiter,,Linked
 adrienquint@netapp.com,password123,Adrien,Quint,recruiter,,Liveramp
 adrienaflalo@mongodb.com,password123,Adrien,Aflalo,recruiter,,Mongodb
 adrienpeyron@linkedin.com,password123,Adrien,Peyron,recruiter,,Netapp
-arnorichard@lewagon.org,password123,Arno,Richard,student,1000,
+francoisdel@gmail.com,password123,Francois,Delattre,student,1000,
 audeclerc@lewagon.org,password123,Aude,Clerc,student,1000,
 aurlegrand@lewagon.org,password123,Aurélien,Legrand,student,1000,
 aymanfarhat@lewagon.org,password123,Ayman,Farhat,student,1000,
