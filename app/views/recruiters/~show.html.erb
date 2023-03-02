@@ -1,0 +1,62 @@
+<div class="container">
+  <div class="row">
+    <div class="card">
+      <div class="col-3">
+        <%= cl_image_tag @company_key, class: "img-fluid" %>
+      </div>
+      <div class="col-9">
+        <h3 style="font-style: italic;">"<%= @recruiter.tagline %>"</h3>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-4">
+      <div class="card">
+        <h3><%= @recruiter.full_name %></h3>
+        <p>Technical Recruiter at <%= @company.name %></p>
+        <a href="www.cal.com/email-a/30mn" class="btn btn-primary btn-lg">Book a meeting</a>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="card">
+        <div class="detail-card-content">
+          <h3>Skills I'm looking for</h3>
+            <ul>
+              <% @skills_array.each do |skill| %>
+                <li><%= skill %></li>
+              <% end %>
+            </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-4">
+      <div class="card">
+        <h3>Looking for candidates with:</h3>
+        <p class="text-justify">
+        <%= @recruiter.looking_for %>
+        </p>
+      </div>
+    </div>
+
+  </div>
+  <div class="row">
+    <div class="col-4">
+      <div class="card">
+      <h3><%= @recruiter.full_name %></h3>
+      <p>Technical Recruiter at <%= @company.name %></p>
+      <a href="www.cal.com/email-a/30mn" class="btn btn-primary btn-lg">Book a meeting</a>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="card">
+        <%= @recruiter.company.company_descriptions %>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="card">
+        <%= cl_image_tag @avatar_key, class: "rounded-circle" %>
+      </div>
+    </div>
+  </div>
+</div>

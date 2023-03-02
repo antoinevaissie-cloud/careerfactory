@@ -1,0 +1,25 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+          <h3 class="text-center" style="font-style: italic;">"<%= @recruiter.tagline %>"</h3>
+      </div>
+    </div>
+  </div>
+  <div class="container" style="padding: 0; margin: 0;">
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="card">
+          <%= cl_image_tag @avatar_key, class: "rounded-circle" %>
+          <h3><%= @recruiter.full_name %></h3>
+          <p>Technical Recruiter at <%= @company.name %></p>
+        </div>
+      </div>
+    </div>
+      <div class="col-lg-4">
+        <div class="card">
+          <%= cl_image_tag @company_key, class: "img-fluid" %>
+        </div>
+      </div>
+  </div>
+</div>
