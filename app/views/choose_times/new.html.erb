@@ -25,14 +25,13 @@
                   }
         %>
         <%= f.input :slot_size, collection: [15, 30], label: "Slot Size (minutes)", as: :select %>
-
       </div>
       <div class="col-4">
         <%= image_tag "times.jpg", class: 'w-100 form-side-image' %>
       </div>
-  </div>
-  <div class="row mt-5 mb-5">
-    <%= f.button :submit, class: "btn btn-primary d-block mx-auto w-50", value: "Create campaign!" %>
-  </div>
+    </div>
+    <div class="row mt-5 mb-5">
+      <%= f.button :submit, class: "btn btn-primary d-block mx-auto w-50", value: "Create campaign!" %>
+    </div>
   <% end %>
 </div>
