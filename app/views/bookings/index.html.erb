@@ -1,7 +1,21 @@
 <div class="container">
-  <div class="row">
-    <% @bookings.each do |booking| %>
-      <%= booking %>
-    <% end %>
+  <div class="row mt-5">
+    <h3 class="text-center">Your meetings</h3>
   </div>
+  <% @bookings.each do |booking| %>
+    <div class="col-md-6 mb-3">
+      <div class="card-product d-flex">
+        <div class="card-product-img">
+            <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
+        </div>
+        <div class="card-product-info flex-grow-1 px-2">
+          <div class="h2">Recruiter: <%= booking.recruiter.full_name %></div>
+          <p>Meeting: <strong><%= booking.start_time.strftime("%I:%M %p") %> - <%= booking.end_time.strftime("%I:%M %p") %></strong></p>
+          <div class="d-flex justify-content-end">
+            <%= link_to "Provide feedback", class: "btn btn-primary ms-auto mt-3" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
 </div>
