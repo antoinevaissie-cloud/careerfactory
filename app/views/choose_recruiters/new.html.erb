@@ -5,7 +5,21 @@
   <%= simple_form_for @recruiter do |f| %>
     <div class="row mt-5">
       <div class="col-8">
-        <%= f.collection_check_boxes :user_ids, @recruiters, :id, :full_name_and_company, {}, { class: 'tag-selector' }%>
+        <%= f.input :user_ids,
+                    as: :check_boxes,
+                    collection: @recruiters.sort_by { |recruiter| recruiter.company.name },
+                    input_html: {
+                      class: 'tag-selector'
+                    },
+                    legend_tag: false,
+                    item_wrapper_class: 'recruiter-tag-wrapper',
+                    label_method: -> (recruiter) {
+                      content_tag(:div, class: 'd-flex justify-content-between') do
+                          [recruiter.company.name, recruiter.full_name].reduce('') { |c, x|
+                            c << content_tag(:span, x)
+                          }.html_safe
+                      end
+                    } %>
       </div>
       <div class="col-4">
         <%= image_tag "recruiters.jpg", class: 'w-100 form-side-image' %>

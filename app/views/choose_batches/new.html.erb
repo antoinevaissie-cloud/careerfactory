@@ -5,12 +5,14 @@
   <%= simple_form_for @batch do |f| %>
     <div class="row mt-5">
       <div class="col-8">
-        <%= f.label :batch_number, "Batch number:" %>
         <%= f.input :batch_number,
                     as: :radio_buttons,
                     legend_tag: false,
                     collection_wrapper_class: 'category-wrapper',
                     item_wrapper_class: 'category-item',
+                    label_method: -> (batch_number) {
+                      "#{image_tag('logolw.png', height: 24, class: 'me-3')} Batch #{batch_number}".html_safe
+                    },
                     input_html: {class: 'category-selector tag-selector',value: "Batch number: #{f.object.batch_number}"},
                     collection: @batch_numbers %>
       </div>
